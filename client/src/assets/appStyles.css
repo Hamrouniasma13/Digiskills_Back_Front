@@ -1,0 +1,26 @@
+/* Components */
+
+/* Chip */
+.chip {
+  display: inline-block;
+  min-width: 125px;
+  margin: 10px;
+  border-radius: 20px;
+}
+
+.chip__inner {
+  display: flex;
+  justify-content: space-around;
+}
+
+.chip__title {
+  align-self: center;
+  padding: 0px 5px;
+}
+
+.chip__action {
+  position: relative;
+  top: -2px;
+  outline: none;
+  border-radius: 50%;
+}
