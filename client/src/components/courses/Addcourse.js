@@ -15,6 +15,7 @@ class Addcourse extends Component {
             description: '',
             goals: '',
             background: '',
+            target:'',
             errors: {}
 
         }
@@ -37,6 +38,7 @@ class Addcourse extends Component {
             description: this.state.description,
             goals: this.state.goals,
             background: this.state.background,
+            target: this.state.target,
 
         };
 
@@ -94,7 +96,13 @@ class Addcourse extends Component {
                                     options={options}
                                     error={errors.speciality}
                                 />
-
+                                   <TextFieldGroup
+                                    placeholder="* audience "
+                                    name="target"
+                                    value={this.state.target}
+                                    onChange={this.onChange}
+                                    error={errors.target}
+                                />
                                 <input type="submit"
                                     value="Submit"
                                     className="btn btn-info btn-block mt-4"

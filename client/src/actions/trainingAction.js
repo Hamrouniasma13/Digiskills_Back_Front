@@ -25,7 +25,7 @@ export function uploadFail(error) {
 
 // Add Training
 export const addTraining = (expData, history) => (dispatch) => {
-axios.post("/api/training", expData)
+axios.post("/api/training/addTraining", expData)
 
     .then((res) => history.push("/trainings"))
     .catch((err) =>

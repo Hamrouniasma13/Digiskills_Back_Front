@@ -12,7 +12,7 @@ import {
 // Add Course
 export const addCourse = (courseData, history) => (dispatch) => {
   axios
-    .post("/api/courses", courseData)
+    .post("/api/course/addCourse", courseData)
     .then((res) => history.push("/dashboard"))
     .catch((err) =>
       dispatch({
@@ -26,7 +26,7 @@ export const addCourse = (courseData, history) => (dispatch) => {
 export const getCourses = () => (dispatch) => {
   dispatch(setCourseLoading());
   axios
-    .get("/api/courses")
+    .get("/api/course/allCourses")
     .then((res) =>
       dispatch({
         type: GET_COURSES,
