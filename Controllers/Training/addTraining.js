@@ -5,7 +5,7 @@ const { Training, validateTraining } = require("../../Models/Training");
 
 const { User } = require("../../Models/User");
 
-exports.addTraining = async function(req, res, next) {
+exports.addTraining = async function (req, res, next) {
   const { error } = validateTraining(req.body);
   if (error) return res.status(400).send(error.details[0].message);
 
@@ -20,7 +20,6 @@ exports.addTraining = async function(req, res, next) {
 
   let training = new Training({
     title: req.body.title,
-    description: req.body.description,
     startDate: start,
     endDate: end,
     speciality: req.body.speciality,

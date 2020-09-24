@@ -8,10 +8,7 @@ const trainingSchema = new Schema({
     type: String,
     required: true
   },
-  description: {
-    type: String,
-    required: true
-  },
+
   startDate: {
     type: Date,
     required: true
@@ -55,7 +52,6 @@ const Training = mongoose.model("Training", trainingSchema);
 function validateTraining(training) {
   const schema = {
     title: joi.string().required(),
-    description: joi.string().required(),
     startDate: joi.date().required(),
     endDate: joi.date().required(),
     speciality: joi.string().required()
@@ -70,12 +66,6 @@ function updateTrainingTitle(training) {
   return joi.validate(training, schema);
 }
 
-function updateTrainingDescription(training) {
-  const schema = {
-    description: joi.string().required()
-  };
-  return joi.validate(training, schema);
-}
 
 function updateTrainingDate(training) {
   const schema = {
@@ -96,7 +86,6 @@ module.exports = {
   Training,
   validateTraining,
   updateTrainingTitle,
-  updateTrainingDescription,
   updateTrainingDate,
   updateTrainingSpeciality
 };

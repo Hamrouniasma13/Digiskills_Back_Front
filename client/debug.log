@@ -3445,3 +3445,6 @@
 [0923/105832.424:ERROR:crash_report_database_win.cc(469)] failed to stat report
 [0923/105832.502:ERROR:crash_report_database_win.cc(469)] failed to stat report
 [0923/105832.502:ERROR:crash_report_database_win.cc(469)] failed to stat report
+[0924/145123.194:ERROR:crash_report_database_win.cc(428)] unexpected header
+[0924/152646.897:ERROR:crash_report_database_win.cc(428)] unexpected header
+[0924/193635.475:ERROR:crash_report_database_win.cc(428)] unexpected header

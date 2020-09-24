@@ -17,6 +17,7 @@ const updateTitle = require("../Controllers/Training/updateTitle");
 const updateDescription = require("../Controllers/Training/updateDescription");
 const updateSpeciality = require("../Controllers/Training/updateSpeciality");
 const updateDate = require("../Controllers/Training/updateDate");
+const allTrainings = require("../Controllers/Training/allTrainings");
 const removeTraining = require("../Controllers/Training/removeTraining");
 
 router.post(
@@ -94,6 +95,8 @@ router.get(
   auth,
   displayTraining.displayTraining
 );
+router.get("/allTrainings", allTrainings.allTrainings);
+
 
 router.delete(
   "/removeTraining/:trainingId",
