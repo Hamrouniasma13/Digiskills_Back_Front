@@ -17,28 +17,45 @@ export const registerUser = (userData, history) => (dispatch) => {
     );
 };
 // Login - Get User Token
-export const loginUser = (userData) => (dispatch) => {
-  axios
-    .post("/api/users/login", userData)
-    .then((res) => {
-      // Save to localStorage
-      const { token } = res.data;
-      // Set token to ls
-      localStorage.setItem("jwtToken", token);
-      // Set token to Auth header
-      setAuthToken(token);
-      // Decode token to get user data
-      const decoded = jwt_decode(token);
-      // Set current user
-      dispatch(setCurrentUser(decoded));
-    })
-    .catch((err) =>
-      dispatch({
-        type: GET_ERRORS,
-        payload: err.response.data
-      })
-    );
+export const loginUser = (userData) => async (dispatch) => {
+  try {
+    const data = await axios.post("/api/auth/signIn", userData);
+    localStorage.setItem("jwtToken", data.headers["x-auth-token"]);
+
+  } catch (err) {
+    if (err.response) {
+      if (err.response.status >= 500) {
+        console.log();
+      } else if (err.response.status >= 400) {
+        console.log();
+      }
+    } else if (err.request) {
+      console.log();
+    }
+  }
 };
+// }
+//   axios
+//     .post("/api/users/login", userData)
+//     .then((res) => {
+//       // Save to localStorage
+//       const { token } = res.data;
+//       // Set token to ls
+//       localStorage.setItem("jwtToken", token);
+//       // Set token to Auth header
+//       setAuthToken(token);
+//       // Decode token to get user data
+//       const decoded = jwt_decode(token);
+//       // Set current user
+//       dispatch(setCurrentUser(decoded));
+//     })
+//     .catch((err) =>
+//       dispatch({
+//         type: GET_ERRORS,
+//         payload: err.response.data
+//       })
+//     );
+// };
 
 // Set logged in user
 export const setCurrentUser = (decoded) => {
