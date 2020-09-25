@@ -17,7 +17,8 @@ import "../../assets/vendor/fontawesome-free/css/all.min.css";
 import "../../assets/css/sb-admin-2.min.css";
 
 import Landing from "../layout/Landing";
-import Login from "../auth/Login";
+// import Login from "../auth/Login";
+import Tab from "../auth/Tab";
 import Register from "../auth/Register";
 import Dashboard from "../dashboard/Dashboard";
 import CreateProfile from "../create-profile/CreateProfile";
@@ -131,7 +132,8 @@ export class Layout extends Component {
     const guestLinks = (
       <div id="wrapper">
         <div id="content-wrapper" class="d-flex flex-column">
-          <Route exact path="/login" component={Login} />
+          {/* <Route exact path="/login" component={Login} /> */}
+          <Route exact path="/login" component={Tab} />
           <Route exact path="/register" component={Register} />
         </div>
       </div>
@@ -140,7 +142,7 @@ export class Layout extends Component {
       <div>
         <div id="wrapper">
           <div id="content-wrapper" class="d-flex flex-column">
-            <Route exact path="/" component={Landing} />
+            <Route exact path="/" component={Tab} />
             
             <div id="content"> {isAuthenticated ? authLinks : guestLinks}</div>
           </div>
