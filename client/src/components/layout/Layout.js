@@ -17,7 +17,8 @@ import "../../assets/vendor/fontawesome-free/css/all.min.css";
 import "../../assets/css/sb-admin-2.min.css";
 
 import Landing from "../layout/Landing";
-import Login from "../auth/Login";
+// import Login from "../auth/Login";
+import Tab from "../auth/Tab";
 import Register from "../auth/Register";
 import Dashboard from "../dashboard/Dashboard";
 import CreateProfile from "../create-profile/CreateProfile";
@@ -30,7 +31,7 @@ import Addcourses from "../courses/Addcourse";
 import AddTraining from "../trainings/AddTraining";
 import Courses from "../courses/Courses";
 import AddModule from "../modules/AddModule";
-import DashboardManager from '../dashboard/DashboardManager'
+import DashboardManager from "../dashboard/DashboardManager";
 
 import store from "../../store";
 
@@ -88,12 +89,12 @@ export class Layout extends Component {
                   <PrivateRoute exact path="/dashboard" component={Dashboard} />
                 </Switch>
                 <Switch>
-                <PrivateRoute
-              exact
-              path='/dashboardManager'
-              component={DashboardManager}
-            />
-            </Switch>
+                  <PrivateRoute
+                    exact
+                    path="/dashboardManager"
+                    component={DashboardManager}
+                  />
+                </Switch>
                 <Switch>
                   <PrivateRoute
                     exact
@@ -137,7 +138,9 @@ export class Layout extends Component {
     return (
       <div>
         <div id="wrapper">
-          <div id="content-wrapper" className="d-flex flex-column">
+          <div id="content-wrapper" class="d-flex flex-column">
+            <Route exact path="/" component={Tab} />
+
             <div id="content"> {isAuthenticated ? authLinks : guestLinks}</div>
           </div>
         </div>

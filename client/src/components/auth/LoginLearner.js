@@ -17,11 +17,19 @@ class LoginLearner extends Component {
     this.onSubmit = this.onSubmit.bind(this);
   }
 
+<<<<<<< HEAD
   componentDidMount() {
     if (this.props.auth.isAuthenticated) {
       this.props.history.push("/dashboard");
     }
   }
+=======
+  // componentDidMount() {
+  //   if (this.props.auth.isAuthenticated) {
+  //     this.props.history.push("/dashboard");
+  //   }
+  // }
+>>>>>>> 5d1ab853bce07c6f4b4cfdfb2a8457655a249613
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.auth.isAuthenticated) {
@@ -52,6 +60,7 @@ class LoginLearner extends Component {
     const { errors } = this.state;
 
     return (
+<<<<<<< HEAD
       <div className="container ">
         <div className="row justify-content-center">
           <div className="col-xl-10 col-lg-12 col-md-9">
@@ -68,6 +77,26 @@ class LoginLearner extends Component {
                       </div>
                       <form onSubmit={this.onSubmit}>
                         <div className="form-group">
+=======
+      <div class="container ">
+        <div class="row justify-content-center">
+          <div class="col-xl-10 col-lg-12 col-md-9">
+            <div class="card o-hidden border-0 shadow-lg my-5">
+              <div class="card-body p-0">
+                <div class="row">
+                  <div class="col-lg-6 d-none d-lg-block bg-gradient-warning "></div>
+                  <div class="col-lg-6">
+                    <div class="p-5">
+                      <div class="text-center">
+                        <h1 class="h4 text-gray-900 mb-4">
+                          Bienvenue Sur Digiskills
+                          <br/>
+                          Espace Apprenant
+                        </h1>
+                      </div>
+                      <form onSubmit={this.onSubmit}>
+                        <div class="form-group">
+>>>>>>> 5d1ab853bce07c6f4b4cfdfb2a8457655a249613
                           <TextFieldGroup
                             placeholder="Adresse Email"
                             name="email"
@@ -77,7 +106,11 @@ class LoginLearner extends Component {
                             error={errors.email}
                           />
                         </div>
+<<<<<<< HEAD
                         <div className="form-group">
+=======
+                        <div class="form-group">
+>>>>>>> 5d1ab853bce07c6f4b4cfdfb2a8457655a249613
                           <TextFieldGroup
                             placeholder="Mot de passe"
                             name="password"
@@ -90,6 +123,7 @@ class LoginLearner extends Component {
                         <input
                           type="submit"
                           value="Connexion"
+<<<<<<< HEAD
                           className="btn btn-dark btn-user btn-block"
                         />
                       </form>
@@ -99,6 +133,12 @@ class LoginLearner extends Component {
                           Créer un compte!
                         </a>
                       </div> */}
+=======
+                          class="btn btn-dark btn-user btn-block"
+                        />
+                      </form>
+                     
+>>>>>>> 5d1ab853bce07c6f4b4cfdfb2a8457655a249613
                     </div>
                   </div>
                 </div>
@@ -106,6 +146,10 @@ class LoginLearner extends Component {
             </div>
           </div>
         </div>
+<<<<<<< HEAD
+=======
+        
+>>>>>>> 5d1ab853bce07c6f4b4cfdfb2a8457655a249613
       </div>
       // </div>
     );
