@@ -64,7 +64,7 @@ class LoginLearner extends Component {
                       <div class="text-center">
                         <h1 class="h4 text-gray-900 mb-4">
                           Bienvenue Sur Digiskills
-                          <br/>
+                          <br />
                           Espace Apprenant
                         </h1>
                       </div>
@@ -95,7 +95,6 @@ class LoginLearner extends Component {
                           class="btn btn-dark btn-user btn-block"
                         />
                       </form>
-                     
                     </div>
                   </div>
                 </div>
@@ -103,7 +102,6 @@ class LoginLearner extends Component {
             </div>
           </div>
         </div>
-        
       </div>
       // </div>
     );

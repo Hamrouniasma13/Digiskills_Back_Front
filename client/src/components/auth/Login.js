@@ -64,12 +64,12 @@ class Login extends Component {
                       <div class="text-center">
                         <h1 class="h4 text-gray-900 mb-4">
                           Bienvenue Sur Digiskills
-                          <br/>
+                          <br />
                           Espace Admin
                         </h1>
                       </div>
                       <form onSubmit={this.onSubmit}>
-                        <div class="form-group">
+                        <div className="form-group">
                           <TextFieldGroup
                             placeholder="Adresse Email"
                             name="email"
@@ -79,7 +79,7 @@ class Login extends Component {
                             error={errors.email}
                           />
                         </div>
-                        <div class="form-group">
+                        <div className="form-group">
                           <TextFieldGroup
                             placeholder="Mot de passe"
                             name="password"
@@ -92,15 +92,15 @@ class Login extends Component {
                         <input
                           type="submit"
                           value="Connexion"
-                          class="btn btn-dark btn-user btn-block"
+                          className="btn btn-dark btn-user btn-block"
                         />
                       </form>
-                      <hr />
-                      <div class="text-center">
-                        <a class="small" href="/register">
+                      {/* <hr />
+                      <div className="text-center">
+                        <a className="small" href="/register">
                           Créer un compte!
                         </a>
-                      </div>
+                      </div> */}
                     </div>
                   </div>
                 </div>
@@ -108,7 +108,6 @@ class Login extends Component {
             </div>
           </div>
         </div>
-        
       </div>
       // </div>
     );

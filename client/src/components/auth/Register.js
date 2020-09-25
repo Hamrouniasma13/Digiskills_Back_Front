@@ -15,16 +15,16 @@ class Register extends Component {
       lastName: "",
       email: "",
       password: "",
-      password2: "",
+      role: "Learner",
       errors: {},
     };
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
   }
   componentDidMount() {
-    if (this.props.auth.isAuthenticated) {
-      this.props.history.push("/dashboard");
-    }
+    // if (this.props.auth.isAuthenticated) {
+    //   this.props.history.push("/dashboard");
+    // }
   }
 
   componentWillReceiveProps(nextProps) {
@@ -45,7 +45,7 @@ class Register extends Component {
       lastName: this.state.lastName,
       email: this.state.email,
       password: this.state.password,
-      password2: this.state.password2,
+      role: this.state.role,
     };
 
     this.props.registerUser(newUser, this.props.history);
@@ -61,7 +61,6 @@ class Register extends Component {
           <div class="card o-hidden border-0 shadow-lg my-5">
             <div class="card-body p-0">
               <div class="row">
-                <div class="col-lg-5 d-none d-lg-block "></div>
                 <div class="col-lg-7">
                   <div class="p-5">
                     <div class="text-center">
@@ -112,7 +111,7 @@ class Register extends Component {
                             error={errors.password}
                           />
                         </div>
-                        <div class="col-sm-6">
+                        {/* <div class="col-sm-6">
                           <TextFieldGroup
                             placeholder="Confirmer mot de passe"
                             name="password2"
@@ -120,8 +119,8 @@ class Register extends Component {
                             value={this.state.password2}
                             onChange={this.onChange}
                             error={errors.password2}
-                          />
-                        </div>
+                          /> 
+                        </div>*/}
                       </div>
                       <input
                         type="submit"
@@ -130,11 +129,11 @@ class Register extends Component {
                     </form>
                     <hr />
 
-                    <div class="text-center">
+                    {/* <div class="text-center">
                       <a class="small" href="/login">
                         Connexion
                       </a>
-                    </div>
+                    </div> */}
                   </div>
                 </div>
               </div>
