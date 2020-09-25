@@ -30,6 +30,8 @@ import Addcourses from "../courses/Addcourse";
 import AddTraining from "../trainings/AddTraining";
 import Courses from "../courses/Courses";
 import AddModule from "../modules/AddModule";
+import DashboardManager from '../dashboard/DashboardManager'
+
 import store from "../../store";
 
 import PrivateRoute from "../common/PrivateRoute";
@@ -86,6 +88,13 @@ export class Layout extends Component {
                 <Switch>
                   <PrivateRoute exact path="/dashboard" component={Dashboard} />
                 </Switch>
+                <Switch>
+                <PrivateRoute
+              exact
+              path='/dashboardManager'
+              component={DashboardManager}
+            />
+            </Switch>
                 <Switch>
                   <PrivateRoute
                     exact
