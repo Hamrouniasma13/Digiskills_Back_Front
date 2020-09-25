@@ -6,6 +6,7 @@ import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { registerUser } from "../../actions/authActions";
 import TextFieldGroup from "../common/TextFieldGroup";
+import SelectListGroup from "../common/SelectListGroup";
 
 class Register extends Component {
   constructor() {
@@ -15,7 +16,7 @@ class Register extends Component {
       lastName: "",
       email: "",
       password: "",
-      role: "Learner",
+      role: "",
       errors: {},
     };
     this.onChange = this.onChange.bind(this);
@@ -55,6 +56,13 @@ class Register extends Component {
     const { errors } = this.state;
 
     const { user } = this.props.auth;
+    const options = [
+      { label: "Choisir un Role", Value: 0 },
+      { label: "Admin", value: "Admin" },
+      { label: "Apprenant", value: "Learner" },
+      { label: "Responsable formation", value: "Training Manager" },
+      { label: "Manager", value: "Manager" },
+    ];
     return (
       <div class="bg-gradient-warning">
         <div class="container">
@@ -97,11 +105,10 @@ class Register extends Component {
                           value={this.state.email}
                           onChange={this.onChange}
                           error={errors.email}
-                          info="This site uses Gravatar so if you want a profile image, use a Gravatar email"
                         />
                       </div>
-                      <div class="form-group row">
-                        <div class="col-sm-6 mb-3 mb-sm-0">
+                      <div class="form-group">
+                        <div class="col-sm-18 mb-3 mb-sm-0">
                           <TextFieldGroup
                             placeholder="Mot de passe"
                             name="password"
@@ -122,6 +129,16 @@ class Register extends Component {
                           /> 
                         </div>*/}
                       </div>
+                      <div class="form-group">
+                        <SelectListGroup
+                          name="role"
+                          value={this.state.role}
+                          onChange={this.onChange}
+                          options={options}
+                          error={errors.role}
+                        />
+                      </div>
+
                       <input
                         type="submit"
                         className="btn btn-warning btn-user btn-block"
