@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { loginUser } from "../../actions/authActions";
 import TextFieldGroup from "../common/TextFieldGroup";
 
-class Login extends Component {
+class LoginLearner extends Component {
   constructor() {
     super();
     this.state = {
@@ -112,7 +112,7 @@ class Login extends Component {
   }
 }
 
-Login.propTypes = {
+LoginLearner.propTypes = {
   loginUser: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,
   errors: PropTypes.object.isRequired,
@@ -123,4 +123,4 @@ const mapStateToProps = (state) => ({
   errors: state.errors,
 });
 
-export default connect(mapStateToProps, { loginUser })(Login);
+export default connect(mapStateToProps, { loginUser })(LoginLearner);

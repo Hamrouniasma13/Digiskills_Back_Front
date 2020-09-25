@@ -71,7 +71,7 @@ export class Layout extends Component {
       <div>
         <div id="wrapper">
           <SideBar></SideBar>
-          <div id="content-wrapper" class="d-flex flex-column">
+          <div id="content-wrapper" className="d-flex flex-column">
             <div id="content">
               <Header />
               {/* <Dashboard /> */}
@@ -80,9 +80,8 @@ export class Layout extends Component {
                 <Route exact path="/trainings" component={Trainings} />
                 <Route exact path="/courses" component={Courses} />
                 <Route exact path="/addModule" component={AddModule} />
-
+                <Route exact path="/register" component={Register} />
                 <Route exact path="/profile/:handle" component={Profile} />
-
                 <Switch>
                   <PrivateRoute exact path="/dashboard" component={Dashboard} />
                 </Switch>
@@ -121,18 +120,15 @@ export class Layout extends Component {
     );
     const guestLinks = (
       <div id="wrapper">
-        <div id="content-wrapper" class="d-flex flex-column">
+        <div id="content-wrapper" className="d-flex flex-column">
           <Route exact path="/login" component={Login} />
-          <Route exact path="/register" component={Register} />
         </div>
       </div>
     );
     return (
       <div>
         <div id="wrapper">
-          <div id="content-wrapper" class="d-flex flex-column">
-            <Route exact path="/" component={Landing} />
-            
+          <div id="content-wrapper" className="d-flex flex-column">
             <div id="content"> {isAuthenticated ? authLinks : guestLinks}</div>
           </div>
         </div>

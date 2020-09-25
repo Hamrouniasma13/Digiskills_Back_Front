@@ -7,8 +7,8 @@ import { GET_ERRORS, SET_CURRENT_USER } from "./types";
 // Register User
 export const registerUser = (userData, history) => (dispatch) => {
   axios
-    .post("/api/users/register", userData)
-    .then((res) => history.push("/login"))
+    .post("/api/user/signUp", userData)
+    .then((res) => history.push("/register"))
     .catch((err) =>
       dispatch({
         type: GET_ERRORS,
@@ -21,7 +21,6 @@ export const loginUser = (userData) => async (dispatch) => {
   try {
     const data = await axios.post("/api/auth/signIn", userData);
     localStorage.setItem("jwtToken", data.headers["x-auth-token"]);
-
   } catch (err) {
     if (err.response) {
       if (err.response.status >= 500) {
