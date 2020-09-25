@@ -52,19 +52,6 @@ class Login extends Component {
     const { errors } = this.state;
 
     return (
-<<<<<<< HEAD
-      <div className="container ">
-        <div className="row justify-content-center">
-          <div className="col-xl-10 col-lg-12 col-md-9">
-            <div className="card o-hidden border-0 shadow-lg my-5">
-              <div className="card-body p-0">
-                <div className="row">
-                  <div className="col-lg-6 d-none d-lg-block bg-gradient-warning "></div>
-                  <div className="col-lg-6">
-                    <div className="p-5">
-                      <div className="text-center">
-                        <h1 className="h4 text-gray-900 mb-4">
-=======
       <div class="container ">
         <div class="row justify-content-center">
           <div class="col-xl-10 col-lg-12 col-md-9">
@@ -76,9 +63,8 @@ class Login extends Component {
                     <div class="p-5">
                       <div class="text-center">
                         <h1 class="h4 text-gray-900 mb-4">
->>>>>>> 5d1ab853bce07c6f4b4cfdfb2a8457655a249613
                           Bienvenue Sur Digiskills
-                          <br/>
+                          <br />
                           Espace Admin
                         </h1>
                       </div>
@@ -122,7 +108,6 @@ class Login extends Component {
             </div>
           </div>
         </div>
-        
       </div>
       // </div>
     );

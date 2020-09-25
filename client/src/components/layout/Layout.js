@@ -131,7 +131,7 @@ export class Layout extends Component {
     const guestLinks = (
       <div id="wrapper">
         <div id="content-wrapper" className="d-flex flex-column">
-          <Route exact path="/login" component={Login} />
+          <Route exact path="/login" component={Tab} />
         </div>
       </div>
     );
@@ -139,7 +139,7 @@ export class Layout extends Component {
       <div>
         <div id="wrapper">
           <div id="content-wrapper" class="d-flex flex-column">
-            <Route exact path="/" component={Tab} />
+            <Route exact path="/" component={Landing} />
 
             <div id="content"> {isAuthenticated ? authLinks : guestLinks}</div>
           </div>
