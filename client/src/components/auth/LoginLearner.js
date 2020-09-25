@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { loginUser } from "../../actions/authActions";
 import TextFieldGroup from "../common/TextFieldGroup";
 
-class Login extends Component {
+class LoginLearner extends Component {
   constructor() {
     super();
     this.state = {
@@ -58,14 +58,14 @@ class Login extends Component {
             <div class="card o-hidden border-0 shadow-lg my-5">
               <div class="card-body p-0">
                 <div class="row">
-                  <div class="col-lg-6 d-none d-lg-block bg-gradient-danger "></div>
+                  <div class="col-lg-6 d-none d-lg-block bg-gradient-warning "></div>
                   <div class="col-lg-6">
                     <div class="p-5">
                       <div class="text-center">
                         <h1 class="h4 text-gray-900 mb-4">
                           Bienvenue Sur Digiskills
                           <br/>
-                          Espace Admin
+                          Espace Apprenant
                         </h1>
                       </div>
                       <form onSubmit={this.onSubmit}>
@@ -95,12 +95,7 @@ class Login extends Component {
                           class="btn btn-dark btn-user btn-block"
                         />
                       </form>
-                      <hr />
-                      <div class="text-center">
-                        <a class="small" href="/register">
-                          Créer un compte!
-                        </a>
-                      </div>
+                     
                     </div>
                   </div>
                 </div>
@@ -115,7 +110,7 @@ class Login extends Component {
   }
 }
 
-Login.propTypes = {
+LoginLearner.propTypes = {
   loginUser: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,
   errors: PropTypes.object.isRequired,
@@ -126,4 +121,4 @@ const mapStateToProps = (state) => ({
   errors: state.errors,
 });
 
-export default connect(mapStateToProps, { loginUser })(Login);
+export default connect(mapStateToProps, { loginUser })(LoginLearner);
