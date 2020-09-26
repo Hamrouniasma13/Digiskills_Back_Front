@@ -24,8 +24,9 @@ export const loginUser = (userData, history) => async (dispatch) => {
     await localStorage.setItem("jwtToken", data.headers["x-auth-token"]);
     await dispatch({
       type: SET_CURRENT_USER,
-      payload: data,
+      payload: jwt_decode(localStorage.jwtToken),
     });
+
     history.push("/dashboard");
   } catch (err) {
     if (err.response) {
@@ -61,7 +62,7 @@ export const loginUser = (userData, history) => async (dispatch) => {
 //       })
 //     );
 // };
-
+// famma 5obila o5ra mana3rafech 3likoum wa9tech 3malthea walé win :D hhhh ok yaani current user theb tchoufha wen  ?
 // Set logged in user
 export const setCurrentUser = (decoded) => {
   return {

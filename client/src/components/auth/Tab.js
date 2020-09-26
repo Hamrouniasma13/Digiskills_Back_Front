@@ -7,8 +7,7 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
-import LoginLearner from './LoginLearner';
-import LoginManger from './LoginManger'
+
 import Login from './Login'
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -78,21 +77,21 @@ export default function NavTabs() {
           value={value}
           onChange={handleChange}
           aria-label="nav tabs example"
-          style={{backgroundColor:'#f6c23e'}}
+          style={{ backgroundColor: '#f6c23e' }}
         >
           <LinkTab label="Espace Admin"  {...a11yProps(0)} />
-          <LinkTab label="Espace Apprenant"  {...a11yProps(1)} />
-          <LinkTab label="Espace Manager" {...a11yProps(2)} />
+          <LinkTab label="Espace Manager"  {...a11yProps(1)} />
+          <LinkTab label="Espace Apprenant" {...a11yProps(2)} />
         </Tabs>
       </AppBar>
       <TabPanel value={value} index={0}>
-        <Login role="Admin"/>
+        <Login role="Admin" />
       </TabPanel>
       <TabPanel value={value} index={1}>
-        <Login role="Manager"/> 
+        <Login role="Manager" />
       </TabPanel>
       <TabPanel value={value} index={2}>
-        <Login role="Learner"/>
+        <Login role="Learner" />
       </TabPanel>
     </div>
   );

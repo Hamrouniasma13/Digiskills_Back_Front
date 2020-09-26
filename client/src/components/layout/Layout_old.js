@@ -73,7 +73,7 @@ export class Layout extends Component {
     const authLinks = (
       <div>
         <div id="wrapper">
-          <SideBar></SideBar>
+          <SideBar />
           <div id="content-wrapper" className="d-flex flex-column">
             <div id="content">
               <Header />
@@ -141,7 +141,17 @@ export class Layout extends Component {
           <div id="content-wrapper" class="d-flex flex-column">
             <Route exact path="/" component={Landing} />
 
-            <div id="content"> {isAuthenticated ? authLinks : guestLinks}</div>
+            <div id="content">
+              <Switch>
+                <Route exact path="/login" component={Tab} />
+                <PrivateRoute
+
+                  path="/dashboard" component={Dashboard} />
+                <Route path="*">
+                  <p>404</p>
+                </Route>
+              </Switch>
+            </div>
           </div>
         </div>
       </div>
