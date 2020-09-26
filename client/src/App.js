@@ -7,7 +7,7 @@ import { clearCurrentProfile } from "./actions/profileActions";
 import { Provider } from "react-redux";
 import store from "./store";
 import PrivateRoute from "./components/common/PrivateRoute";
-import Layout from "./components/layout/Layout";
+import Layout from "./components/layout/Layout_old";
 import "./App.css";
 import "./assets/appStyles.css";
 
@@ -39,7 +39,9 @@ class App extends Component {
     return (
       <Provider store={store}>
         <Router>
-          <Layout />
+          <Switch>
+            <Layout />
+          </Switch>
         </Router>
       </Provider>
     );

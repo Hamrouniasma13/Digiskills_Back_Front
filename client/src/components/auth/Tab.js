@@ -86,13 +86,13 @@ export default function NavTabs() {
         </Tabs>
       </AppBar>
       <TabPanel value={value} index={0}>
-        <Login/>
+        <Login role="Admin"/>
       </TabPanel>
       <TabPanel value={value} index={1}>
-        <LoginLearner/>  
+        <Login role="Manager"/> 
       </TabPanel>
       <TabPanel value={value} index={2}>
-        <LoginManger/>
+        <Login role="Learner"/>
       </TabPanel>
     </div>
   );

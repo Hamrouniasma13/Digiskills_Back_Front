@@ -1,12 +1,14 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import { withRouter } from "react-router-dom";
+
 import { connect } from "react-redux";
 import { loginUser } from "../../actions/authActions";
 import TextFieldGroup from "../common/TextFieldGroup";
 
 class Login extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       email: "",
       password: "",
@@ -40,8 +42,8 @@ class Login extends Component {
       email: this.state.email,
       password: this.state.password,
     };
-
-    this.props.loginUser(userData);
+    console.log("login");
+    this.props.loginUser(userData, this.props.history);
   }
 
   onChange(e) {
@@ -65,7 +67,7 @@ class Login extends Component {
                         <h1 class="h4 text-gray-900 mb-4">
                           Bienvenue Sur Digiskills
                           <br />
-                          Espace Admin
+                          Espace {this.props.role}
                         </h1>
                       </div>
                       <form onSubmit={this.onSubmit}>
@@ -125,4 +127,4 @@ const mapStateToProps = (state) => ({
   errors: state.errors,
 });
 
-export default connect(mapStateToProps, { loginUser })(Login);
+export default connect(mapStateToProps, { loginUser })(withRouter(Login));
