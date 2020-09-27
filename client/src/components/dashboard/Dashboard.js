@@ -7,6 +7,7 @@ import Spinner from "../common/Spinner";
 import Header from "../layout/Header";
 import Footer from "../layout/Footer";
 import { Switch, Route } from "react-router-dom";
+import Trainings from "../trainings/Trainings";
 
 import ProfileActions from "./ProfileActions";
 import SideBar from "../layout/roleSideBar";
@@ -70,9 +71,10 @@ class Dashboard extends Component {
           <PrivateRoute exact path={`${path}`}>
             <p>admin</p>
           </PrivateRoute>
-          <PrivateRoute path={`${path}/second`}>
-            <p>Second Page</p>
-          </PrivateRoute>
+          <PrivateRoute
+            path={`${path}/second`}
+            component={Trainings}
+          ></PrivateRoute>
         </Switch>
       );
     };
