@@ -146,10 +146,10 @@ export class Layout extends Component {
                 <Route exact path="/login" component={Tab} />
                 <PrivateRoute path="/dashboard" component={Dashboard} />
                 <PrivateRoute path="/add-training" component={AddTraining} />
-                <Route exact path="/trainings" component={Trainings} />
-                <Route exact path="/courses" component={Courses} />
-                <Route exact path="/addModule" component={AddModule} />
-                <Route exact path="/register" component={Register} />
+                <PrivateRoute exact path="/trainings" component={Trainings} />
+                <PrivateRoute exact path="/courses" component={Courses} />
+                <PrivateRoute exact path="/addModule" component={AddModule} />
+                <PrivateRoute exact path="/register" component={Register} />
                 <PrivateRoute exact path="/addcourses" component={Addcourses} />
                 <PrivateRoute path="/add-training" component={AddTraining} />
                 <Route exact path="/not-found" component={NotFound} />
