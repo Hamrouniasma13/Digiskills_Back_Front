@@ -105,7 +105,8 @@ class AddTraining extends Component {
       !courses.loading &&
       courses.courses
         .filter((course) => {
-          // make sure to render all courses that are NOT displayed in Chips
+          // make sure to render all courses that are NOT displayed in Chips fech ta3mlou lenna ? njibou fi el course kol eli andna bech ynajem yhotha  fi training which is mazelt makmltech khater na9sa button 
+          // trah warrini win tjib fihoum
           let noMatch = true;
 
           for (let i = 0; i < addedCourses.length; i++) {
