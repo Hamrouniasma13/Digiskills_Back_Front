@@ -4,7 +4,7 @@ const nodemailer = require("nodemailer");
 
 const { User, validateUser } = require("../../Models/User");
 
-exports.signUp = async function(req, res, next) {
+exports.signUp = async function (req, res, next) {
   const { error } = validateUser(req.body);
   if (error) return res.status(400).send(error.details[0].message);
 
@@ -25,13 +25,13 @@ exports.signUp = async function(req, res, next) {
   const transporter = nodemailer.createTransport({
     service: "gmail",
     auth: {
-      user: "example@example.com",
-      pass: "example"
+      user: "echo.asmahamrouni@gmail.com",
+      pass: "73630410Asma"
     }
   });
 
   const mailoptions = {
-    from: "example@example.com",
+    from: "echo.asmahamrouni@gmail.com",
     to: user.email,
     subject: "Registration",
     text: `Your password is ${req.body.password}`
