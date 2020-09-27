@@ -84,6 +84,12 @@ const SideBar = ({ userRole }) => {
                 <Link class="collapse-item" to="/dashboard/add-training">
                   Ajouter
                 </Link>
+                <Link class="collapse-item" to="/dashboard/addcourses">
+                  Ajouter Course
+              </Link>
+                <Link class="collapse-item" to="/dashboard/courses">
+                  Liste des cours
+          </Link>
               </div>
             </div>
           </li>
