@@ -81,6 +81,9 @@ export class SideBar extends Component {
                 <Link class="collapse-item" to="/addcourses">
                   Ajouter
                 </Link>
+                <Link class="collapse-item" to="/listManagers">
+                  listManagers
+                </Link>
                 {/* <a class="collapse-item" href="utilities-animation.html">
                   Animations
                 </a>
