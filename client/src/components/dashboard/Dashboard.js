@@ -4,12 +4,12 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { getCurrentProfile, deleteAccount } from "../../actions/profileActions";
 import Spinner from "../common/Spinner";
-import Header from "../layout/Header"
-import Footer from "../layout/Footer"
+import Header from "../layout/Header";
+import Footer from "../layout/Footer";
 import { Switch, Route } from "react-router-dom";
 
 import ProfileActions from "./ProfileActions";
-import SideBar from '../layout/roleSideBar'
+import SideBar from "../layout/roleSideBar";
 import DashboardManager from "../dashboard/DashboardManager";
 import PrivateRoute from "../common/PrivateRoute";
 class Dashboard extends Component {
@@ -64,7 +64,7 @@ class Dashboard extends Component {
 
     const AdminRoutes = () => {
       const { path } = useRouteMatch();
-      console.log("path    " + path)
+      console.log("path    " + path);
       return (
         <Switch>
           <PrivateRoute exact path={`${path}`}>
@@ -74,56 +74,53 @@ class Dashboard extends Component {
             <p>Second Page</p>
           </PrivateRoute>
         </Switch>
-      )
-    }
+      );
+    };
 
     const LearnerRoutes = () => {
       const { path } = useRouteMatch();
-      console.log("path    " + path)
+      console.log("path    " + path);
       return (
         <Switch>
           <PrivateRoute exact path={`${path}`}>
-            <p>admin</p>
+            <p>Learner</p>
           </PrivateRoute>
           <PrivateRoute path={`${path}/second`}>
             <p>Second Page</p>
           </PrivateRoute>
         </Switch>
-      )
-    }
-
-
-
+      );
+    };
 
     const ManagerRoutes = () => {
-      return <p>Manager</p>
-    }
+      return <p>Manager</p>;
+    };
 
     const TrainerManagerRoutes = () => {
-      return <p>TrainingManager</p>
-    }
+      return <p>TrainingManager</p>;
+    };
     const RoleRoutes = () => {
-
       switch (user.role) {
-        case ("Learner"):
-          return <LearnerRoutes />
+        case "Learner":
+          return <LearnerRoutes />;
           break;
 
-        case ("Manager"):
-          return <ManagerRoutes />
+        case "Manager":
+          return <ManagerRoutes />;
           break;
-        case ("Admin"):
-          return <AdminRoutes />
+        case "Admin":
+          return <AdminRoutes />;
           break;
 
-        case ("Training manager"):
-          return <TrainerManagerRoutes />
+        case "Training manager":
+          return <TrainerManagerRoutes />;
 
-        default: return <p>No role</p>
+        default:
+          return <p>No role</p>;
       }
-    }
+    };
     return (
-      <div className="dashboard" >
+      <div className="dashboard">
         <div id="wrapper">
           <SideBar userRole={user.role} />
           <div id="content-wrapper" className="d-flex flex-column">
@@ -137,7 +134,6 @@ class Dashboard extends Component {
             </div>
           </div>
         </div>
-
       </div>
     );
   }

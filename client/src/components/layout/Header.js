@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import Spinner from "../common/Spinner";
 import { logoutUser } from "../../actions/authActions";
+import img from "../../assets/img/avatar.png";
 
 import {
   clearCurrentProfile,
@@ -266,10 +267,9 @@ export class Header extends Component {
                 </span>
                 <img
                   className="rounded-circle"
-                  src={user.avatar}
-                  alt={user.name}
+                  src={img}
+                  //alt={user.name}
                   style={{ width: "25px", marginRight: "5px" }}
-                  title="You must have a Gravatar connected to our email to display an image"
                 />
               </a>
 
