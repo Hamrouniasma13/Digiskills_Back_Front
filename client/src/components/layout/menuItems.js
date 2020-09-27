@@ -5,11 +5,11 @@ export const AdminMenuItems = [
     items: [
       {
         name: "Liste",
-        href: "/trainings",
+        href: "/dashboard/trainings",
       },
       {
         name: "Ajouter",
-        href: "/add-training",
+        href: "/dashboard/add-training",
       },
     ],
   },
@@ -19,11 +19,11 @@ export const AdminMenuItems = [
     items: [
       {
         name: "Liste",
-        href: "/courses",
+        href: "/dashboard/courses",
       },
       {
         name: "Ajouter",
-        href: "/addcourses",
+        href: "/dashboard/addcourses",
       },
     ],
   },
@@ -33,11 +33,11 @@ export const AdminMenuItems = [
     items: [
       {
         name: "Liste",
-        href: "/courses",
+        href: "/dashboard/courses",
       },
       {
         name: "Ajouter",
-        href: "/register",
+        href: "/dashboard/register",
       },
     ],
   },
@@ -50,7 +50,7 @@ export const LearnerMenuItems = [
     items: [
       {
         name: "Plan de Formation",
-        href: "/trainings",
+        href: "/dashboard/trainings",
       },
     ],
   },
@@ -63,11 +63,11 @@ export const ManagerMenuItems = [
     items: [
       {
         name: "Liste",
-        href: "/trainings",
+        href: "/dashboard/trainings",
       },
       {
         name: "Ajouter",
-        href: "/add-training",
+        href: "/dashboard/add-training",
       },
     ],
   },
@@ -77,11 +77,11 @@ export const ManagerMenuItems = [
     items: [
       {
         name: "Liste",
-        href: "/courses",
+        href: "/dashboard/courses",
       },
       {
         name: "Ajouter",
-        href: "/register",
+        href: "/dashboard/register",
       },
     ],
   },
@@ -93,11 +93,11 @@ export const TrainingManagerMenuItems = [
     items: [
       {
         name: "Liste",
-        href: "/trainings",
+        href: "/dashboard/trainings",
       },
       {
         name: "Ajouter",
-        href: "/add-training",
+        href: "/dashboard/add-training",
       },
     ],
   },
@@ -107,11 +107,11 @@ export const TrainingManagerMenuItems = [
     items: [
       {
         name: "Liste",
-        href: "/trainings",
+        href: "/dashboard/trainings",
       },
       {
         name: "Ajouter",
-        href: "/add-training",
+        href: "/dashboard/add-training",
       },
     ],
   },

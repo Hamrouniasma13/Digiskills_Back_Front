@@ -145,16 +145,7 @@ export class Layout extends Component {
               <Switch>
                 <Route exact path="/login" component={Tab} />
                 <PrivateRoute path="/dashboard" component={Dashboard} />
-                <PrivateRoute path="/add-training" component={AddTraining} />
-                <PrivateRoute exact path="/trainings" component={Trainings} />
-                <PrivateRoute exact path="/courses" component={Courses} />
-                <PrivateRoute exact path="/addModule" component={AddModule} />
-                <PrivateRoute exact path="/register" component={Register} />
-                <PrivateRoute exact path="/addcourses" component={Addcourses} />
-                <PrivateRoute path="/add-training" component={AddTraining} />
-                <Route exact path="/not-found" component={NotFound} />
-
-                <Route exact path="*">
+                <Route path="*">
                   <p>404</p>
                 </Route>
               </Switch>

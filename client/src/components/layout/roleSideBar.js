@@ -78,10 +78,10 @@ const SideBar = ({ userRole }) => {
             >
               <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Formations : </h6>
-                <Link class="collapse-item" to="/trainings">
+                <Link class="collapse-item" to="/dashboard/trainings">
                   Liste
                 </Link>
-                <Link class="collapse-item" to="/add-training">
+                <Link class="collapse-item" to="/dashboard/add-training">
                   Ajouter
                 </Link>
               </div>

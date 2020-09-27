@@ -13,6 +13,13 @@ import ProfileActions from "./ProfileActions";
 import SideBar from "../layout/roleSideBar";
 import DashboardManager from "../dashboard/DashboardManager";
 import PrivateRoute from "../common/PrivateRoute";
+import NotFound from "../not-found/NotFound";
+import Addcourses from "../courses/Addcourse";
+import AddTraining from "../trainings/AddTraining";
+import Courses from "../courses/Courses";
+import AddModule from "../modules/AddModule";
+import Register from "../auth/Register";
+
 class Dashboard extends Component {
   componentDidMount() {
     this.props.getCurrentProfile();
@@ -71,10 +78,13 @@ class Dashboard extends Component {
           <PrivateRoute exact path={`${path}`}>
             <p>admin</p>
           </PrivateRoute>
-          <PrivateRoute
-            path={`${path}/second`}
-            component={Trainings}
-          ></PrivateRoute>
+          <Route path={`${path}/trainings`} component={Trainings} />
+          <Route path={`${path}/add-training`} component={AddTraining} />
+          <Route path={`${path}/courses`} component={Courses} />
+          <Route path={`${path}/addModule`} component={AddModule} />
+          <Route path={`${path}/register`} component={Register} />
+          <Route path={`${path}/addcourses`} component={Addcourses} />
+          <Route path={`${path}/add-training`} component={AddTraining} />
         </Switch>
       );
     };
@@ -87,15 +97,24 @@ class Dashboard extends Component {
           <PrivateRoute exact path={`${path}`}>
             <p>Learner</p>
           </PrivateRoute>
-          <PrivateRoute path={`${path}/second`}>
-            <p>Second Page</p>
-          </PrivateRoute>
+          <Route path={`${path}/trainings`} component={Trainings} />
         </Switch>
       );
     };
 
     const ManagerRoutes = () => {
-      return <p>Manager</p>;
+      const { path } = useRouteMatch();
+      console.log("path    " + path);
+      return (
+        <Switch>
+          <PrivateRoute exact path={`${path}`}>
+            <p>Manager</p>
+          </PrivateRoute>
+          <Route path={`${path}/trainings`} component={Trainings} />
+          <Route path={`${path}/add-training`} component={AddTraining} />
+          <Route path={`${path}/register`} component={Register} />
+        </Switch>
+      );
     };
 
     const TrainerManagerRoutes = () => {
