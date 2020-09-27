@@ -1,14 +1,12 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { deleteManager } from "../../actions/authActions";
-
+import { deleteManager } from "../../actions/managerActions";
 
 class ManagerItems extends Component {
- 
-    onDeleteClick(id) {
-        this.props.deleteManager(id);
-      }
+  onDeleteClick(id) {
+    this.props.deleteManager(id);
+  }
   render() {
     const { user } = this.props;
 
@@ -38,4 +36,10 @@ ManagerItems.propTypes = {
   deleteManager: PropTypes.func.isRequired,
 };
 
-export default connect(null, { deleteManager })(ManagerItems);
+const mapStateToProps = (user) => {
+  return {
+    user,
+  };
+};
+
+export default connect(mapStateToProps, { deleteManager })(ManagerItems);

@@ -145,9 +145,7 @@ export class Layout extends Component {
               <Switch>
                 <Route exact path="/login" component={Tab} />
                 <PrivateRoute path="/dashboard" component={Dashboard} />
-                <Route path="*">
-                  <p>404</p>
-                </Route>
+                <Route path="*" component={NotFound}></Route>
               </Switch>
             </div>
           </div>

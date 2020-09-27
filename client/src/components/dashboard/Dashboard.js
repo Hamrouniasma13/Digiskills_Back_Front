@@ -6,6 +6,7 @@ import { getCurrentProfile, deleteAccount } from "../../actions/profileActions";
 import Spinner from "../common/Spinner";
 import Header from "../layout/Header";
 import Footer from "../layout/Footer";
+import ListeManager from "../manager/ListManagers";
 import { Switch, Route } from "react-router-dom";
 import Trainings from "../trainings/Trainings";
 
@@ -79,6 +80,7 @@ class Dashboard extends Component {
             <p>admin</p>
           </PrivateRoute>
           <Route path={`${path}/trainings`} component={Trainings} />
+          <Route path={`${path}/listManagers`} component={ListeManager} />
           <Route path={`${path}/add-training`} component={AddTraining} />
           <Route path={`${path}/courses`} component={Courses} />
           <Route path={`${path}/addModule`} component={AddModule} />
