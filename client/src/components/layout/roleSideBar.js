@@ -6,6 +6,7 @@ import {
   TrainingManagerMenuItems,
 } from "./menuItems";
 import { Link, useHistory, useRouteMatch } from "react-router-dom";
+import { Menu } from "@material-ui/core";
 
 function selectMenuItem(userRole) {
   switch (userRole) {
@@ -27,7 +28,7 @@ function selectMenuItem(userRole) {
   }
 }
 
-const SideBar = ({ userRole }) => {
+const roleSideBar = ({ userRole }) => {
   const menuItems = selectMenuItem(userRole);
 
   return (
@@ -63,33 +64,35 @@ const SideBar = ({ userRole }) => {
               class="nav-link collapsed"
               href="#"
               data-toggle="collapse"
-              data-target="#collapseTwo"
+              data-target={"#" + menu.class}
               aria-expanded="true"
-              aria-controls="collapseTwo"
+              aria-controls={menu.class}
             >
-              <i class="fas fa-fw fa-folder"></i>
+              <i class={menu.icons}></i>
               <span>{menu.name} </span>
             </a>
             <div
-              id="collapseTwo"
+              id={menu.class}
               class="collapse"
-              aria-labelledby="headingTwo"
+              aria-labelledby={menu.label}
               data-parent="#accordionSidebar"
             >
               <div class="bg-white py-2 collapse-inner rounded">
-                <h6 class="collapse-header">Formations : </h6>
-                <Link class="collapse-item" to="/dashboard/trainings">
-                  Liste
-                </Link>
-                <Link class="collapse-item" to="/dashboard/add-training">
+                <h6 class="collapse-header">{menu.name} </h6>
+                {menu.items.map((it) => (
+                  <Link class="collapse-item" to={it.href}>
+                    {it.name}
+                  </Link>
+                ))}
+                {/* <Link class="collapse-item" to="/dashboard/add-training">
                   Ajouter
                 </Link>
                 <Link class="collapse-item" to="/dashboard/addcourses">
                   Ajouter Course
-              </Link>
+                </Link>
                 <Link class="collapse-item" to="/dashboard/courses">
                   Liste des cours
-          </Link>
+                </Link> */}
               </div>
             </div>
           </li>
@@ -99,4 +102,4 @@ const SideBar = ({ userRole }) => {
   );
 };
 
-export default SideBar;
+export default roleSideBar;

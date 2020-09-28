@@ -1,11 +1,10 @@
 import axios from "axios";
 import {
   GET_ERRORS,
-  SET_CURRENT_USER,
-  MANAGERS_LOADING,
+  MANAGER_LOADING,
   GET_MANAGERS,
   GET_MANAGER,
-  DELETE_MANAGERS,
+  DELETE_MANAGER,
 } from "./types";
 
 export const getManagers = () => (dispatch) => {
@@ -18,19 +17,13 @@ export const getManagers = () => (dispatch) => {
         payload: res.data,
       })
     )
-    .catch((err) =>
+    .catch(
+      (err) => console.log("hii"),
       dispatch({
         type: GET_MANAGERS,
         payload: null,
       })
     );
-};
-
-// Manager loading
-export const setManagerLoading = () => {
-  return {
-    type: MANAGERS_LOADING,
-  };
 };
 
 // Delete Manager
@@ -39,7 +32,7 @@ export const deleteManager = (id) => (dispatch) => {
     .delete(`/api/removeUser/${id}`)
     .then((res) =>
       dispatch({
-        type: DELETE_MANAGERS,
+        type: DELETE_MANAGER,
         payload: id,
       })
     )
@@ -51,7 +44,7 @@ export const deleteManager = (id) => (dispatch) => {
     );
 };
 
-// Get Training
+// Get Manager
 export const getManager = (id) => (dispatch) => {
   dispatch(setManagerLoading());
   axios
@@ -68,4 +61,11 @@ export const getManager = (id) => (dispatch) => {
         payload: null,
       })
     );
+};
+
+// Manager loading
+export const setManagerLoading = () => {
+  return {
+    type: MANAGER_LOADING,
+  };
 };

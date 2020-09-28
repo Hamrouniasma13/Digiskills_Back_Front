@@ -7,27 +7,29 @@ import {
   TRAINING_LOADING,
   GET_TRAININGS,
   DELETE_TRAINING,
-  UPLOAD_DOCUMENT_SUCCESS, UPLOAD_DOCUMENT_FAIL
+  UPLOAD_DOCUMENT_SUCCESS,
+  UPLOAD_DOCUMENT_FAIL,
 } from "./types";
 export function uploadSuccess({ data }) {
   return {
-    type: 'UPLOAD_DOCUMENT_SUCCESS',
+    type: "UPLOAD_DOCUMENT_SUCCESS",
     data,
   };
 }
 
 export function uploadFail(error) {
   return {
-    type: 'UPLOAD_DOCUMENT_FAIL',
+    type: "UPLOAD_DOCUMENT_FAIL",
     error,
   };
 }
 
 // Add Training
 export const addTraining = (expData, history) => (dispatch) => {
-  axios.post("/api/training/addTraining", expData)
+  axios
+    .post("/api/training/addTraining", expData)
 
-    .then((res) => history.push("/trainings"))
+    .then((res) => history.push("/dashboard/trainings"))
     .catch((err) =>
       dispatch({
         type: GET_ERRORS,

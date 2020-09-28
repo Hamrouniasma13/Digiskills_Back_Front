@@ -115,6 +115,7 @@ class Dashboard extends Component {
           <Route path={`${path}/trainings`} component={Trainings} />
           <Route path={`${path}/add-training`} component={AddTraining} />
           <Route path={`${path}/register`} component={Register} />
+          <Route path={`${path}/courses`} component={Courses} />
         </Switch>
       );
     };

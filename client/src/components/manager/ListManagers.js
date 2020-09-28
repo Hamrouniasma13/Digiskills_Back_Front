@@ -11,9 +11,20 @@ class ListManagers extends Component {
   }
 
   render() {
+    const { managers = null, loading } = this.props.manager || {};
+
+    let managerItems;
+
+    if (managers === null || loading) {
+      managerItems = <Spinner />;
+    } else {
+      managerItems = managers.map((manager) => (
+        <ManagerItems key={manager._id} manager={manager} />
+      ));
+    }
     // const { users, loading } = this.props.user;
-    const { user } = this.props;
-    let managerItems = <ManagerItems key={user._id} user={user} />;
+    // const { user } = this.props;
+    // let managerItems = <ManagerItems key={user._id} user={user} />;
 
     return (
       <div className="trainings">
@@ -32,13 +43,15 @@ class ListManagers extends Component {
 
 ListManagers.propTypes = {
   getManagers: PropTypes.func.isRequired,
-  user: PropTypes.object.isRequired,
+  manager: PropTypes.object.isRequired,
 };
 
-const mapStateToProps = (user) => {
-  return {
-    user,
-  };
-};
-
+// const mapStateToProps = (user) => {
+//   return {
+//     user,
+//   };
+// };
+const mapStateToProps = (state) => ({
+  manager: state.manager,
+});
 export default connect(mapStateToProps, { getManagers })(ListManagers);

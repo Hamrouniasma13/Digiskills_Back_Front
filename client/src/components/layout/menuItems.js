@@ -2,6 +2,8 @@ export const AdminMenuItems = [
   {
     name: "Formations",
     icons: "fas fa-fw fa-folder",
+    class: "collapseTwo",
+    label: "headingTwo",
     items: [
       {
         name: "Liste",
@@ -15,7 +17,9 @@ export const AdminMenuItems = [
   },
   {
     name: "Cours",
-    icons: "fas fa-fw fa-menu",
+    icons: "fas fa-fw fa-wrench",
+    class: "collapseUtilities",
+    label: "headingUtilities",
     items: [
       {
         name: "Liste",
@@ -30,10 +34,12 @@ export const AdminMenuItems = [
   {
     name: "Client",
     icons: "fas fa-fw fa-menu",
+    class: "collapsePages",
+    label: "headingPages",
     items: [
       {
         name: "Liste",
-        href: "/dashboard/courses",
+        href: "/dashboard/listManagers",
       },
       {
         name: "Ajouter",
@@ -47,6 +53,8 @@ export const LearnerMenuItems = [
   {
     name: "Formations",
     icons: "fas fa-fw fa-folder",
+    class: "collapseTwo",
+    label: "headingTwo",
     items: [
       {
         name: "Plan de Formation",
@@ -60,6 +68,8 @@ export const ManagerMenuItems = [
   {
     name: "Plan Formation",
     icons: "fas fa-fw fa-folder",
+    class: "collapseTwo",
+    label: "headingTwo",
     items: [
       {
         name: "Liste",
@@ -74,6 +84,8 @@ export const ManagerMenuItems = [
   {
     name: "Utilisateurs",
     icons: "fas fa-fw fa-menu",
+    class: "collapseUtilities",
+    label: "headingUtilities",
     items: [
       {
         name: "Liste",
@@ -90,6 +102,8 @@ export const TrainingManagerMenuItems = [
   {
     name: "Training Manager",
     icons: "fas fa-fw fa-folder",
+    class: "collapseTwo",
+    label: "headingTwo",
     items: [
       {
         name: "Liste",
@@ -104,6 +118,8 @@ export const TrainingManagerMenuItems = [
   {
     name: "Second Menu",
     icons: "fas fa-fw fa-menu",
+    class: "collapseUtilities",
+    label: "headingUtilities",
     items: [
       {
         name: "Liste",

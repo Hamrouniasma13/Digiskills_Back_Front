@@ -2,14 +2,7 @@ import axios from "axios";
 import setAuthToken from "../utils/setAuthToken";
 import jwt_decode from "jwt-decode";
 import { useHistory } from "react-router-dom";
-import {
-  GET_ERRORS,
-  SET_CURRENT_USER,
-  MANAGERS_LOADING,
-  GET_MANAGERS,
-  GET_MANAGER,
-  DELETE_MANAGERS,
-} from "./types";
+import { GET_ERRORS, SET_CURRENT_USER } from "./types";
 
 // Register User
 export const registerUser = (userData, history) => (dispatch) => {

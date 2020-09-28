@@ -1,19 +1,19 @@
 import {
-  DELETE_MANAGERS,
+  DELETE_MANAGER,
   GET_MANAGERS,
   GET_MANAGER,
-  MANAGERS_LOADING,
+  MANAGER_LOADING,
 } from "../actions/types";
 
 const initialState = {
-  users: [],
-  user: {},
+  managers: null,
+  manager: null,
   loading: false,
 };
 
 export default function (state = initialState, action) {
   switch (action.type) {
-    case MANAGERS_LOADING:
+    case MANAGER_LOADING:
       return {
         ...state,
         loading: true,
@@ -21,19 +21,21 @@ export default function (state = initialState, action) {
     case GET_MANAGERS:
       return {
         ...state,
-        users: action.payload,
+        managers: action.payload,
         loading: false,
       };
     case GET_MANAGER:
       return {
         ...state,
-        user: action.payload,
+        manager: action.payload,
         loading: false,
       };
-    case DELETE_MANAGERS:
+    case DELETE_MANAGER:
       return {
         ...state,
-        users: state.users.filter((user) => user._id !== action.payload),
+        managers: state.managers.filter(
+          (manager) => manager._id !== action.payload
+        ),
       };
 
     default:

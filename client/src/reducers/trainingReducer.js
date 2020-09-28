@@ -20,6 +20,7 @@ export default function (state = initialState, action) {
         loading: true,
       };
     case GET_TRAININGS:
+      console.log("red");
       return {
         ...state,
         trainings: action.payload,
