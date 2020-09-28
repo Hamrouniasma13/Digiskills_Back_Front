@@ -17,6 +17,7 @@ import PrivateRoute from "../common/PrivateRoute";
 import NotFound from "../not-found/NotFound";
 import Addcourses from "../courses/Addcourse";
 import AddTraining from "../trainings/AddTraining";
+import NewTraining from "../trainings/newTraining";
 import Courses from "../courses/Courses";
 import AddModule from "../modules/AddModule";
 import Register from "../auth/Register";
@@ -114,6 +115,8 @@ class Dashboard extends Component {
           </PrivateRoute>
           <Route path={`${path}/trainings`} component={Trainings} />
           <Route path={`${path}/add-training`} component={AddTraining} />
+          <Route path={`${path}/new-training`} component={NewTraining} />
+
           <Route path={`${path}/register`} component={Register} />
           <Route path={`${path}/courses`} component={Courses} />
         </Switch>
