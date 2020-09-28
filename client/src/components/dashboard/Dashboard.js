@@ -19,7 +19,7 @@ import AddTraining from "../trainings/AddTraining";
 import Courses from "../courses/Courses";
 import AddModule from "../modules/AddModule";
 import Register from "../auth/Register";
-
+import Managers from '../managers/Managers'
 class Dashboard extends Component {
   componentDidMount() {
     this.props.getCurrentProfile();
@@ -81,6 +81,8 @@ class Dashboard extends Component {
           <Route path={`${path}/trainings`} component={Trainings} />
           <Route path={`${path}/add-training`} component={AddTraining} />
           <Route path={`${path}/courses`} component={Courses} />
+          <Route path={`${path}/listeManagers`} component={Managers} />
+
           <Route path={`${path}/addModule`} component={AddModule} />
           <Route path={`${path}/register`} component={Register} />
           <Route path={`${path}/addcourses`} component={Addcourses} />

@@ -31,6 +31,7 @@ import Addcourses from "../courses/Addcourse";
 import AddTraining from "../trainings/AddTraining";
 import Courses from "../courses/Courses";
 import AddModule from "../modules/AddModule";
+
 import DashboardManager from "../dashboard/DashboardManager";
 
 import store from "../../store";
@@ -145,9 +146,7 @@ export class Layout extends Component {
               <Switch>
                 <Route exact path="/login" component={Tab} />
                 <PrivateRoute path="/dashboard" component={Dashboard} />
-                <Route path="*">
-                  <p>404</p>
-                </Route>
+                <Route path="*" component={NotFound}></Route>
               </Switch>
             </div>
           </div>

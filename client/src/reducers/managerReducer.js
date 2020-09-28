@@ -1,50 +1,50 @@
 import {
-    GET_COURSE,
-    COURSE_LOADING,
-    GET_COURSES,
-    ADD_COURSE,
-    DELETE_COURSE,
-  } from "../actions/types";
-  
-  const initialState = {
-    courses: [],
-    course: {},
+    GET_MANAGER,
+    MANAGER_LOADING_LOADING,
+    GET_MANAGERS,
+    ADD_MANAGER,
+    DELETE_MANAGER,
+    MANAGER_LOADING,
+} from "../actions/types";
+
+const initialState = {
+    managers: [],
+    manager: {},
     loading: true,
-  };
-  
-  export default function (state = initialState, action) {
+};
+
+export default function (state = initialState, action) {
     switch (action.type) {
-      case COURSE_LOADING:
-        return {
-          ...state,
-          loading: true,
-        };
-      case GET_COURSES:
-        return {
-          ...state,
-          courses: action.payload,
-          loading: false,
-        };
-      case GET_COURSE:
-        return {
-          ...state,
-          course: action.payload,
-          loading: false,
-        };
-      case ADD_COURSE:
-        return {
-          ...state,
-          courses: [action.payload, ...state.courses],
-        };
-      case DELETE_COURSE:
-        return {
-          ...state,
-          courses: state.courses.filter(
-            (course) => course._id !== action.payload
-          ),
-        };
-      default:
-        return state;
+        case MANAGER_LOADING:
+            return {
+                ...state,
+                loading: true,
+            };
+        case GET_MANAGERS:
+            return {
+                ...state,
+                managers: action.payload,
+                loading: false,
+            };
+        case GET_MANAGER:
+            return {
+                ...state,
+                manager: action.payload,
+                loading: false,
+            };
+        case ADD_MANAGER:
+            return {
+                ...state,
+                managers: [action.payload, ...state.managers],
+            };
+        case DELETE_MANAGER:
+            return {
+                ...state,
+                managers: state.managers.filter(
+                    (manager) => manager._id !== action.payload
+                ),
+            };
+        default:
+            return state;
     }
-  }
-  
+}
