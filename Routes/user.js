@@ -4,6 +4,7 @@ const router = express.Router();
 
 const auth = require("../Middleware/auth");
 const isAdmin = require("../Middleware/isAdmin");
+const isManager = require("../Middleware/isManager");
 
 const signUp = require("../Controllers/User/signUp");
 const myProfile = require("../Controllers/User/myProfile");
@@ -17,7 +18,7 @@ const findUser = require("../Controllers/User/findUser");
 const userProfile = require("../Controllers/User/userProfile");
 const removeUser = require("../Controllers/User/removeUser");
 
-router.post("/signUp", auth, isAdmin, signUp.signUp);
+router.post("/signUp", auth, isAdmin || isManager, signUp.signUp);
 
 router.get("/allLearners", auth, isAdmin, allLearners.allLearners);
 
