@@ -15,9 +15,8 @@ class AddTraining extends Component {
     super(props);
     this.state = {
       title: "",
-      description: "",
-      datedebut: "",
-      datefin: "",
+      startDate: "",
+      endDate: "",
       speciality: "",
       course: "",
       coursesList: [],
@@ -58,9 +57,9 @@ class AddTraining extends Component {
     const expData = {
       title: this.state.title,
       speciality: this.state.speciality,
-      datedebut: this.state.datedebut,
-      datefin: this.state.datefin,
-      courses: this.state.addedCourses,
+      startDate: this.state.startDate,
+      endDate: this.state.endDate,
+      // courses: this.state.addedCourses,
     };
 
     // console.log(expData);
@@ -105,7 +104,7 @@ class AddTraining extends Component {
       !courses.loading &&
       courses.courses
         .filter((course) => {
-          // make sure to render all courses that are NOT displayed in Chips fech ta3mlou lenna ? njibou fi el course kol eli andna bech ynajem yhotha  fi training which is mazelt makmltech khater na9sa button 
+          // make sure to render all courses that are NOT displayed in Chips fech ta3mlou lenna ? njibou fi el course kol eli andna bech ynajem yhotha  fi training which is mazelt makmltech khater na9sa button
           // trah warrini win tjib fihoum
           let noMatch = true;
 
@@ -212,26 +211,26 @@ class AddTraining extends Component {
                       })}
                     </div>
                   ) : (
-                      <div>
-                        <p>Loading Courses...</p>
-                      </div>
-                    )}
+                    <div>
+                      <p>Loading Courses...</p>
+                    </div>
+                  )}
 
                   <h6>Date Début</h6>
                   <TextFieldGroup
-                    name="datedebut"
+                    name="startDate"
                     type="date"
-                    value={this.state.datedebut}
+                    value={this.state.startDate}
                     onChange={this.onChange}
-                    error={errors.datedebut}
+                    error={errors.startDate}
                   />
                   <h6>Date Fin</h6>
                   <TextFieldGroup
-                    name="datefin"
+                    name="endDate"
                     type="date"
-                    value={this.state.datefin}
+                    value={this.state.endDate}
                     onChange={this.onChange}
-                    error={errors.datefin}
+                    error={errors.endDate}
                   />
                   <button type="submit" className="btn btn-info btn-block mt-4">
                     Submit

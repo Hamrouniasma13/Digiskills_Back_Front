@@ -1,63 +1,75 @@
 import axios from "axios";
 
 import {
-    GET_MANAGER,
-    MANAGER_LOADING,
-    GET_MANAGERS,
-    ADD_MANAGER,
-    DELETE_MANAGER,
-    GET_ERRORS,
+  GET_ERRORS,
+  MANAGER_LOADING,
+  GET_MANAGERS,
+  GET_MANAGER,
+  DELETE_MANAGER,
 } from "./types";
 
 
 
 //GET COURSES
 export const getManagers = () => (dispatch) => {
-    dispatch(setManagerLoading());
-    axios
-        .get("/api/user/allManagers")
-        .then((res) =>
-            dispatch({
-                type: GET_MANAGERS,
-                payload: res.data,
-            })
-        )
-        .catch((err) =>
-            dispatch({
-                type: GET_MANAGERS,
-                payload: null,
-            })
-        );
+  dispatch(setManagerLoading());
+  axios
+    .get("/api/user/allManagers")
+    .then((res) =>
+      dispatch({
+        type: GET_MANAGERS,
+        payload: res.data,
+      })
+    )
+    .catch(
+      (err) => console.log("hii"),
+      dispatch({
+        type: GET_MANAGERS,
+        payload: null,
+      })
+    );
 };
-// Set loading state
+
+// Delete Manager
+export const deleteManager = (id) => (dispatch) => {
+  axios
+    .delete(`/api/removeUser/${id}`)
+    .then((res) =>
+      dispatch({
+        type: DELETE_MANAGER,
+        payload: id,
+      })
+    )
+    .catch((err) =>
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data,
+      })
+    );
+};
+
+// Get Manager
+export const getManager = (id) => (dispatch) => {
+  dispatch(setManagerLoading());
+  axios
+    .get(`/api/userProfile/${id}`)
+    .then((res) =>
+      dispatch({
+        type: GET_MANAGER,
+        payload: res.data,
+      })
+    )
+    .catch((err) =>
+      dispatch({
+        type: GET_MANAGER,
+        payload: null,
+      })
+    );
+};
+
+// Manager loading
 export const setManagerLoading = () => {
-    return {
-        type: MANAGER_LOADING,
-    };
+  return {
+    type: MANAGER_LOADING,
+  };
 };
-
-// Delete Course
-// export const deleteCourse = (id) => (dispatch) => {
-//     axios
-//         .delete(`/api/courses/${id}`)
-//         .then((res) =>
-//             dispatch({
-//                 type: DELETE_COURSE,
-//                 payload: id,
-//             })
-//         )
-//         .catch((err) =>
-//             dispatch({
-//                 type: GET_ERRORS,
-//                 payload: err.response.data,
-//             })
-//         );
-// };
-
-//clear errors
-// Clear errors
-// export const clearErrors = () => {
-//   return {
-//     type: CLEAR_ERRORS,
-//   };
-// };
