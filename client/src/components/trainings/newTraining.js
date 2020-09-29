@@ -11,15 +11,29 @@ import {
 import { Formik, FieldArray } from "formik";
 import IconButton from "@material-ui/core/IconButton";
 import AddBoxIcon from "@material-ui/icons/AddBox";
-import BackspaceIcon from "@material-ui/icons/Backspace";
 import { setProfileLoading } from "../../actions/profileActions";
+import { random } from "lodash";
+
+import CoursesTags from "./coursesTags";
+
 class NewTraining extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       loadingCourses: true,
-      courses: "",
+      courses: [],
+      selectedCourses: [],
     };
+    this.DeleteCourse = this.DeleteCourse.bind(this);
+  }
+
+  DeleteCourse(index) {
+    let newSelectedCourses = this.state.selectedCourses.filter(
+      (value, i) => i !== index
+    );
+    this.setState((prev) => ({
+      selectedCourses: newSelectedCourses,
+    }));
   }
 
   componentDidMount() {
@@ -62,13 +76,11 @@ class NewTraining extends React.Component {
               speciality: "",
               startDate: "",
               endDate: "",
-              courses: [
-                {
-                  title: "",
-                },
-              ],
+              courses: this.state.selectedCourses,
             }}
-            onSubmit={(values) => console.log(values)}
+            onSubmit={(values, { setFieldValue }) => {
+              console.log(values);
+            }}
           >
             {({
               values,
@@ -112,73 +124,54 @@ class NewTraining extends React.Component {
                 </FormControl>
 
                 {!this.state.loadingCourses && (
-                  <FieldArray name="courses">
-                    {({ remove, push }) => (
-                      <>
-                        {values.courses.length > 0 &&
-                          values.courses.map((course, index) => (
-                            <Grid key={index} container item xs={12}>
-                              <Grid item xs={10}>
-                                <FormControl style={{ width: "100%" }}>
-                                  <InputLabel htmlFor="age-native-simple">
-                                    Background
-                                  </InputLabel>
-                                  <Select
-                                    fullWidth
-                                    margin="normal"
-                                    name={`courses.${index}.title`}
-                                    onChange={(e) =>
-                                      setFieldValue(
-                                        `courses.${index}.title`,
-                                        e.target.value
-                                      )
-                                    }
-                                    inputProps={{
-                                      name: "speciality",
-                                    }}
-                                  >
-                                    {this.state.courses.map((course) => (
-                                      <option
-                                        key={course._id}
-                                        value={course.title}
-                                      >
-                                        {course.title}
-                                      </option>
-                                    ))}
-                                  </Select>
-                                </FormControl>
-                              </Grid>
-                              <Grid container alignContent="center" item xs={2}>
-                                <IconButton
-                                  onClick={() => remove(index)}
-                                  aria-label="add"
-                                  size="small"
-                                  style={{
-                                    color: "red",
-                                  }}
-                                >
-                                  <BackspaceIcon fontSize="inherit" />
-                                </IconButton>
-                                <IconButton
-                                  onClick={() =>
-                                    push({
-                                      title: "",
-                                    })
-                                  }
-                                  style={{
-                                    color: "green",
-                                  }}
-                                  aria-label="add"
-                                  size="small"
-                                >
-                                  <AddBoxIcon fontSize="inherit" />
-                                </IconButton>
-                              </Grid>
-                            </Grid>
-                          ))}
-                      </>
-                    )}
-                  </FieldArray>
+                  <FormControl style={{ width: "100%" }}>
+                    <InputLabel htmlFor="age-native-simple">Cours</InputLabel>
+                    <Select
+                      fullWidth
+                      margin="normal"
+                      name="courses"
+                      defaultValue={values.speciality}
+                      onChange={async (e) => {
+                        await this.setState((prevState) => ({
+                          selectedCourses: prevState.selectedCourses.concat(
+                            e.target.value
+                          ),
+                        }));
+
+                        setFieldValue("courses", this.state.selectedCourses);
+                      }}
+                      inputProps={{
+                        name: "courses",
+                      }}
+                    >
+                      {this.state.courses.map(
+                        (course) =>
+                          !(
+                            this.state.selectedCourses.indexOf(course.title) >=
+                            0
+                          ) && (
+                            <option
+                              key={Math.random().toString(36).substring(7)}
+                              value={course.title}
+                            >
+                              {course.title}
+                            </option>
+                          )
+                      )}
+                    </Select>
+                  </FormControl>
+                )}
+                {this.state.selectedCourses.length > 0 && (
+                  <Grid container item xs={12}>
+                    {this.state.selectedCourses.map((course, index) => (
+                      <CoursesTags
+                        key={Math.random().toString(36).substring(7)}
+                        index={index}
+                        course={course}
+                        DeleteCourse={this.DeleteCourse}
+                      />
+                    ))}
+                  </Grid>
                 )}
                 <Button onClick={submitForm}>Submit</Button>
               </>

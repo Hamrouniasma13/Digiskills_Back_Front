@@ -1,0 +1,15 @@
+import React from "react";
+import Chip from "@material-ui/core/Chip";
+import BackspaceIcon from "@material-ui/icons/Backspace";
+const CoursesTags = ({ course, DeleteCourse, index }) => {
+  return (
+    <Chip
+      label={course}
+      onDelete={() => DeleteCourse(index)}
+      deleteIcon={<BackspaceIcon />}
+      variant="outlined"
+    />
+  );
+};
+
+export default CoursesTags;
