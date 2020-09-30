@@ -27,13 +27,14 @@ class NewTraining extends React.Component {
     this.DeleteCourse = this.DeleteCourse.bind(this);
   }
 
-  DeleteCourse(index) {
+  DeleteCourse(index, setFieldValue) {
     let newSelectedCourses = this.state.selectedCourses.filter(
       (value, i) => i !== index
     );
     this.setState((prev) => ({
       selectedCourses: newSelectedCourses,
     }));
+    setFieldValue("courses", newSelectedCourses);
   }
 
   componentDidMount() {
@@ -168,6 +169,7 @@ class NewTraining extends React.Component {
                         key={Math.random().toString(36).substring(7)}
                         index={index}
                         course={course}
+                        setFieldValue={setFieldValue}
                         DeleteCourse={this.DeleteCourse}
                       />
                     ))}
