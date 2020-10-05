@@ -37,25 +37,25 @@ class NewTraining extends React.Component {
     setFieldValue("courses", newSelectedCourses);
   }
 
-  componentDidMount() {
-    var myHeaders = new Headers();
-    myHeaders.append(
-      "x-auth-token",
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZjZlMzlmODEyMDgzNDE5NjhjZGQ4YmIiLCJyb2xlIjoiTWFuYWdlciIsImlhdCI6MTYwMTI5MDM1Mn0.LvpkrY5DWfLTRgQgM65SyUMUgmBGBkFQvURwYgX4KwY"
-    );
-    myHeaders.append("Content-Type", "application/json");
-    fetch("/api/course/allCourses", {
-      method: "GET",
-      headers: myHeaders,
-    })
-      .then((res) => res.json())
-      .then((result) =>
-        this.setState({
-          loadingCourses: false,
-          courses: result,
-        })
-      );
-  }
+  // componentDidMount() {
+  //   var myHeaders = new Headers();
+  //   myHeaders.append(
+  //     "x-auth-token",
+  //     "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZjZlMzlmODEyMDgzNDE5NjhjZGQ4YmIiLCJyb2xlIjoiTWFuYWdlciIsImlhdCI6MTYwMTI5MDM1Mn0.LvpkrY5DWfLTRgQgM65SyUMUgmBGBkFQvURwYgX4KwY"
+  //   );
+  //   myHeaders.append("Content-Type", "application/json");
+  //   fetch("/api/course/allCourses", {
+  //     method: "GET",
+  //     headers: myHeaders,
+  //   })
+  //     .then((res) => res.json())
+  //     .then((result) =>
+  //       this.setState({
+  //         loadingCourses: false,
+  //         courses: result,
+  //       })
+  //     );
+  // }
   render() {
     return (
       <Grid container item xs={12}>
@@ -111,7 +111,31 @@ class NewTraining extends React.Component {
                     margin="normal"
                     name="speciality"
                     value={values.speciality}
-                    onChange={handleChange}
+                    onChange={(e) => {
+                      this.setState({ loadingCourses: true });
+                      const selectedSpec = e.target.value;
+                      setFieldValue("speciality", selectedSpec);
+                      var myHeaders = new Headers();
+                      myHeaders.append(
+                        "x-auth-token",
+                        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZjZlMzlmODEyMDgzNDE5NjhjZGQ4YmIiLCJyb2xlIjoiTWFuYWdlciIsImlhdCI6MTYwMTI5MDM1Mn0.LvpkrY5DWfLTRgQgM65SyUMUgmBGBkFQvURwYgX4KwY"
+                      );
+                      myHeaders.append("Content-Type", "application/json");
+                      fetch(
+                        `/api/course/displayCourseByBackground/${selectedSpec}`,
+                        {
+                          method: "GET",
+                          headers: myHeaders,
+                        }
+                      )
+                        .then((res) => res.json())
+                        .then((res) =>
+                          this.setState({
+                            courses: res,
+                            loadingCourses: false,
+                          })
+                        );
+                    }}
                     inputProps={{
                       name: "speciality",
                     }}
@@ -131,7 +155,8 @@ class NewTraining extends React.Component {
                       fullWidth
                       margin="normal"
                       name="courses"
-                      defaultValue={values.speciality}
+                      defaultValue="1"
+                      value={values.speciality}
                       onChange={async (e) => {
                         await this.setState((prevState) => ({
                           selectedCourses: prevState.selectedCourses.concat(
@@ -145,6 +170,7 @@ class NewTraining extends React.Component {
                         name: "courses",
                       }}
                     >
+                      <option value="1">choose Course...</option>
                       {this.state.courses.map(
                         (course) =>
                           !(
@@ -175,6 +201,36 @@ class NewTraining extends React.Component {
                     ))}
                   </Grid>
                 )}
+
+                <TextField
+                  fullWidth
+                  name="startDate"
+                  label="Date Debut"
+                  type="date"
+                  value={values.startDate}
+                  variant="outlined"
+                  margin="normal"
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+                />
+                <TextField
+                  fullWidth
+                  name="endDate"
+                  label="Date Fin"
+                  type="date"
+                  value={values.endDate}
+                  variant="outlined"
+                  margin="normal"
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+                />
+
                 <Button onClick={submitForm}>Submit</Button>
               </>
             )}
