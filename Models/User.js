@@ -29,6 +29,7 @@ const userSchema = new Schema({
     required: true,
   },
   company: String,
+  manager: Schema.Types.ObjectId,
   points: Number,
   picture: String,
   courses: [
