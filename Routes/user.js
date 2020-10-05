@@ -20,7 +20,7 @@ const removeUser = require("../Controllers/User/removeUser");
 
 router.post("/signUp", auth, isAdmin || isManager, signUp.signUp);
 
-router.get("/allLearners", auth, isAdmin, allLearners.allLearners);
+router.get("/allLearners", auth, isAdmin || isManager, allLearners.allLearners);
 
 router.get("/userProfile/:userId", auth, userProfile.userProfile);
 

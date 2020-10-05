@@ -38,8 +38,12 @@ export const AdminMenuItems = [
     label: "headingPages",
     items: [
       {
-        name: "Liste",
-        href: "/dashboard/listManagers",
+        name: "Liste Managers",
+        href: "/dashboard/managers",
+      },
+      {
+        name: "Liste Apprenant",
+        href: "/dashboard/learners",
       },
       {
         name: "Ajouter",

@@ -14,6 +14,8 @@ import SideBar from "../layout/roleSideBar";
 import PrivateRoute from "../common/PrivateRoute";
 import NotFound from "../not-found/NotFound";
 import Addcourses from "../courses/Addcourse";
+import Learners from "../learner/Learner";
+import Managers from "../manager/ListManagers";
 import AddTraining from "../trainings/AddTraining";
 import NewTraining from "../trainings/newTraining";
 import Courses from "../courses/Courses";
@@ -78,9 +80,9 @@ class Dashboard extends Component {
             <p>admin</p>
           </PrivateRoute>
           <Route path={`${path}/trainings`} component={Trainings} />
-          <Route path={`${path}/add-training`} component={AddTraining} />
+          <Route path={`${path}/learners`} component={Learners} />
+          <Route path={`${path}/managers`} component={Managers} />
           <Route path={`${path}/courses`} component={Courses} />
-
           <Route path={`${path}/addModule`} component={AddModule} />
           <Route path={`${path}/register`} component={Register} />
           <Route path={`${path}/addcourses`} component={Addcourses} />

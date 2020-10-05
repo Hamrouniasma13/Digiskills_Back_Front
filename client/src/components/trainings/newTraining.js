@@ -116,10 +116,7 @@ class NewTraining extends React.Component {
                       const selectedSpec = e.target.value;
                       setFieldValue("speciality", selectedSpec);
                       var myHeaders = new Headers();
-                      myHeaders.append(
-                        "x-auth-token",
-                        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZjZlMzlmODEyMDgzNDE5NjhjZGQ4YmIiLCJyb2xlIjoiTWFuYWdlciIsImlhdCI6MTYwMTI5MDM1Mn0.LvpkrY5DWfLTRgQgM65SyUMUgmBGBkFQvURwYgX4KwY"
-                      );
+                      myHeaders.append("x-auth-token", localStorage.jwtToken);
                       myHeaders.append("Content-Type", "application/json");
                       fetch(
                         `/api/course/displayCourseByBackground/${selectedSpec}`,
