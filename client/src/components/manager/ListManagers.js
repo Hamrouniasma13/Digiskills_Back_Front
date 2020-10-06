@@ -26,6 +26,16 @@ class Manager extends Component {
       );
   }
 
+  onDeleteClick(id) {
+    var myHeaders = new Headers();
+    myHeaders.append("x-auth-token", localStorage.jwtToken);
+    myHeaders.append("Content-Type", "application/json");
+    fetch(`/api/user/removeUser/${id}`, {
+      method: "delete",
+      headers: myHeaders,
+    }).then((res) => res.json());
+  }
+
   render() {
     return (
       <div class="card shadow mb-4">
@@ -45,6 +55,8 @@ class Manager extends Component {
                   <th>Email</th>
                   <th>Nom</th>
                   <th>Prenom</th>
+                  <th>company</th>
+                  <th></th>
                 </tr>
               </thead>
               <tbody>
@@ -53,6 +65,15 @@ class Manager extends Component {
                     <td>{manager.email}</td>
                     <td>{manager.lastName}</td>
                     <td>{manager.firstName}</td>
+                    <td>{manager.company}</td>
+                    <td>
+                      <button
+                        onClick={this.onDeleteClick.bind(this, manager._id)}
+                        className="btn btn-danger btn-circle"
+                      >
+                        <i class="fas fa-trash"></i>
+                      </button>
+                    </td>
                   </tr>
                 ))}
               </tbody>

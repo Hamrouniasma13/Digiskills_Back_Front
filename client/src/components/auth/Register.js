@@ -70,55 +70,57 @@ class Register extends Component {
       //         <div class="row">
       //           <div class="col-lg-7">
       //             <div class="p-5">
-      <>
-        <div class="text-center">
-          <h1 class="h4 text-gray-900 mb-4">Créer un compte</h1>
-        </div>
-        <form onSubmit={this.onSubmit}>
-          <div class="form-group row">
-            <div class="col-sm-6 mb-3 mb-sm-0">
-              <TextFieldGroup
-                placeholder="Prénom"
-                name="firstName"
-                type="firstName"
-                value={this.state.firstName}
-                onChange={this.onChange}
-                error={errors.firstName}
-              />
+      <div class="container">
+        <div className="row">
+          <div className="col-md-8 m-auto">
+            <div class="text-center">
+              <h1 class="h4 text-gray-900 mb-4">Créer un compte</h1>
             </div>
-            <div class="col-sm-6">
-              <TextFieldGroup
-                placeholder="Nom"
-                name="lastName"
-                type="lastName"
-                value={this.state.lastName}
-                onChange={this.onChange}
-                error={errors.lastName}
-              />
-            </div>
-          </div>
-          <div class="form-group">
-            <TextFieldGroup
-              placeholder="Adresse E-mail"
-              name="email"
-              type="email"
-              value={this.state.email}
-              onChange={this.onChange}
-              error={errors.email}
-            />
-          </div>
-          <div class="form-group">
-            <div class="col-sm-18 mb-3 mb-sm-0">
-              <TextFieldGroup
-                placeholder="Mot de passe"
-                name="password"
-                type="password"
-                value={this.state.password}
-                onChange={this.onChange}
-                error={errors.password}
-              />
-            </div>
-            {/* <div class="col-sm-6">
+            <form onSubmit={this.onSubmit}>
+              <div class="form-group row">
+                <div class="col-sm-6 mb-3 mb-sm-0">
+                  <TextFieldGroup
+                    placeholder="Prénom"
+                    name="firstName"
+                    type="firstName"
+                    value={this.state.firstName}
+                    onChange={this.onChange}
+                    error={errors.firstName}
+                  />
+                </div>
+                <div class="col-sm-6">
+                  <TextFieldGroup
+                    placeholder="Nom"
+                    name="lastName"
+                    type="lastName"
+                    value={this.state.lastName}
+                    onChange={this.onChange}
+                    error={errors.lastName}
+                  />
+                </div>
+              </div>
+              <div class="form-group">
+                <TextFieldGroup
+                  placeholder="Adresse E-mail"
+                  name="email"
+                  type="email"
+                  value={this.state.email}
+                  onChange={this.onChange}
+                  error={errors.email}
+                />
+              </div>
+              <div class="form-group">
+                <div class="col-sm-18 mb-3 mb-sm-0">
+                  <TextFieldGroup
+                    placeholder="Mot de passe"
+                    name="password"
+                    type="password"
+                    value={this.state.password}
+                    onChange={this.onChange}
+                    error={errors.password}
+                  />
+                </div>
+                {/* <div class="col-sm-6">
                           <TextFieldGroup
                             placeholder="Confirmer mot de passe"
                             name="password2"
@@ -128,21 +130,26 @@ class Register extends Component {
                             error={errors.password2}
                           /> 
                         </div>*/}
-          </div>
-          <div class="form-group">
-            <SelectListGroup
-              name="role"
-              value={this.state.role}
-              onChange={this.onChange}
-              options={options}
-              error={errors.role}
-            />
-          </div>
+              </div>
+              <div class="form-group">
+                <SelectListGroup
+                  name="role"
+                  value={this.state.role}
+                  onChange={this.onChange}
+                  options={options}
+                  error={errors.role}
+                />
+              </div>
 
-          <input type="submit" className="btn btn-warning btn-user btn-block" />
-        </form>
-        <hr />
-      </>
+              <input
+                type="submit"
+                className="btn btn-warning btn-user btn-block"
+              />
+            </form>
+            <hr />
+          </div>
+        </div>
+      </div>
     );
   }
 }

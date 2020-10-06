@@ -27,6 +27,15 @@ class Learner extends Component {
         console.log("ok")
       );
   }
+  onDeleteClick(id) {
+    var myHeaders = new Headers();
+    myHeaders.append("x-auth-token", localStorage.jwtToken);
+    myHeaders.append("Content-Type", "application/json");
+    fetch(`/api/user/removeUser/${id}`, {
+      method: "delete",
+      headers: myHeaders,
+    }).then((res) => res.json());
+  }
 
   render() {
     return (
@@ -55,6 +64,14 @@ class Learner extends Component {
                     <td>{learner.email}</td>
                     <td>{learner.lastName}</td>
                     <td>{learner.firstName}</td>
+                    <td>
+                      <button
+                        onClick={this.onDeleteClick.bind(this, learner._id)}
+                        className="btn btn-danger btn-circle"
+                      >
+                        <i class="fas fa-trash"></i>
+                      </button>
+                    </td>
                   </tr>
                 ))}
               </tbody>
