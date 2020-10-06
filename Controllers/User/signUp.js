@@ -27,15 +27,15 @@ exports.signUp = async function (req, res, next) {
     service: "gmail",
     auth: {
       user: "echo.asmahamrouni@gmail.com",
-      pass: "73630410Asma"
-    }
+      pass: "73630410Asma",
+    },
   });
 
   const mailoptions = {
     from: "echo.asmahamrouni@gmail.com",
     to: user.email,
     subject: "Registration",
-    text: `Your password is ${req.body.password}`
+    text: `Your password is ${req.body.password}`,
   };
 
   transporter.sendMail(mailoptions);
