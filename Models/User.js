@@ -55,6 +55,7 @@ userSchema.methods.generateAuthToken = async function () {
 };
 
 const User = mongoose.model("User", userSchema);
+const pattern = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
 
 function validateUser(user) {
   const schema = {
@@ -64,7 +65,8 @@ function validateUser(user) {
       .string()
       .email({ minDomainSegments: 2, tlds: { allow: ["com", "net"] } })
       .required(),
-    password: joi.string().required(),
+    password: joi.string().regex(RegExp(pattern)).required(),
+    
     role: joi.string().required(),
   };
   return joi.validate(user, schema);
