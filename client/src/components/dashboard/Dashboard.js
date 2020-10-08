@@ -22,54 +22,89 @@ import Courses from "../courses/Courses";
 import AddModule from "../modules/AddModule";
 import Register from "../auth/Register";
 class Dashboard extends Component {
-  componentDidMount() {
-    this.props.getCurrentProfile();
-  }
+  // componentDidMount() {
+  //   this.props.getCurrentProfile();
+  // }
 
   onDeleteClick(e) {
     this.props.deleteAccount();
   }
+
+  gettrainingbyid(id) {
+    var myHeaders = new Headers();
+    myHeaders.append("x-auth-token", localStorage.jwtToken);
+    myHeaders.append("Content-Type", "application/json");
+    fetch(`/api/training//displayTraining/${id}`, {
+      method: "GET",
+      headers: myHeaders,
+    })
+      .then((res) => res.json())
+      .then((res) =>
+        this.setState({
+          trainings: res,
+          loadingtrainings: false,
+        })
+      );
+  }
   render() {
     const { user } = this.props.auth;
-
-    const { profile, loading } = this.props.profile;
+    // const { profile, loading } = this.props.profile;
 
     let dashboardContent;
+    const TrainingList = (id) => {
+      var myHeaders = new Headers();
+      myHeaders.append("x-auth-token", localStorage.jwtToken);
+      myHeaders.append("Content-Type", "application/json");
+      fetch(`/api/training/displayTraining/${id}`, {
+        method: "GET",
+        headers: myHeaders,
+      })
+        .then((res) => res.json())
+        .then(
+          (res) =>
+            this.setState({
+              trainings: res,
+              loadingtrainings: false,
+            }),
+          console.log("ok" + user._id)
+        );
+      return <div>{user.training}</div>;
+    };
 
-    if (profile === null || loading) {
-      dashboardContent = <Spinner />;
-    } else {
-      //Check if logged in user has profile data
-      if (Object.keys(profile).length > 0) {
-        dashboardContent = (
-          <div>
-            <p className="lead text-muted">
-              Welcome{" "}
-              <Link to={`/profile/${profile.handle}`}>{user.firstName}</Link>
-            </p>
-            <ProfileActions />
-            <div style={{ marginBottom: "60px" }} />
-            {/* <button
-              onClick={this.onDeleteClick.bind(this)}
-              className="btn btn-danger"
-            >
-              Delete My Account
-            </button> */}
-          </div>
-        );
-      } else {
-        //User is logged in but no profile
-        dashboardContent = (
-          <div>
-            <p className="lead text-muted">Welcome {user.firstName}</p>
-            <p>You have not yet setup a profile, please add some info</p>
-            <Link to="/create-profile" className="btn btn-lg btn-info">
-              Create Profile
-            </Link>
-          </div>
-        );
-      }
-    }
+    // if (profile === null || loading) {
+    //   dashboardContent = <Spinner />;
+    // } else {
+    //   //Check if logged in user has profile data
+    //   if (Object.keys(profile).length > 0) {
+    //     dashboardContent = (
+    //       <div>
+    //         <p className="lead text-muted">
+    //           Welcome{" "}
+    //           <Link to={`/profile/${profile.handle}`}>{user.firstName}</Link>
+    //         </p>
+    //         <ProfileActions />
+    //         <div style={{ marginBottom: "60px" }} />
+    //         {/* <button
+    //           onClick={this.onDeleteClick.bind(this)}
+    //           className="btn btn-danger"
+    //         >
+    //           Delete My Account
+    //         </button> */}
+    //       </div>
+    //     );
+    //   } else {
+    //     //User is logged in but no profile
+    //     dashboardContent = (
+    //       <div>
+    //         <p className="lead text-muted">Welcome {user.firstName}</p>
+    //         <p>You have not yet setup a profile, please add some info</p>
+    //         <Link to="/create-profile" className="btn btn-lg btn-info">
+    //           Create Profile
+    //         </Link>
+    //       </div>
+    //     );
+    //   }
+    // }
 
     const AdminRoutes = () => {
       const { path } = useRouteMatch();
@@ -98,6 +133,7 @@ class Dashboard extends Component {
         <Switch>
           <PrivateRoute exact path={`${path}`}>
             <p>Learner</p>
+            <TrainingList handler={user.training}></TrainingList>
           </PrivateRoute>
           <Route path={`${path}/trainings`} component={Trainings} />
         </Switch>
@@ -166,17 +202,16 @@ class Dashboard extends Component {
 }
 
 Dashboard.propTypes = {
-  getCurrentProfile: PropTypes.func.isRequired,
+  // getCurrentProfile: PropTypes.func.isRequired,
   deleteAccount: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,
-  profile: PropTypes.object.isRequired,
+  // profile: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = (state) => ({
-  profile: state.profile,
+  // profile: state.profile,
   auth: state.auth,
 });
 export default connect(mapStateToProps, {
-  getCurrentProfile,
   deleteAccount,
 })(Dashboard);

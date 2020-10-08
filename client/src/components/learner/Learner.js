@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import Moment from "react-moment";
 
 class Learner extends Component {
   constructor(props) {
@@ -6,9 +7,11 @@ class Learner extends Component {
     this.state = {
       loadingLearners: true,
       learners: [],
+      trainings: [],
+      loadingTrainins: true,
     };
   }
-  s;
+
   componentDidMount() {
     var myHeaders = new Headers();
     myHeaders.append("x-auth-token", localStorage.jwtToken);
@@ -18,13 +21,27 @@ class Learner extends Component {
       headers: myHeaders,
     })
       .then((res) => res.json())
-      .then(
-        (result) =>
-          this.setState({
-            loadingLearners: false,
-            learners: result,
-          }),
-        console.log("ok")
+      .then((result) =>
+        this.setState({
+          loadingLearners: false,
+          learners: result,
+        })
+      );
+  }
+  gettrainingbyid(id) {
+    var myHeaders = new Headers();
+    myHeaders.append("x-auth-token", localStorage.jwtToken);
+    myHeaders.append("Content-Type", "application/json");
+    fetch(`/api/training/displayTraining/${id}`, {
+      method: "GET",
+      headers: myHeaders,
+    })
+      .then((res) => res.json())
+      .then((res) =>
+        this.setState({
+          trainings: res,
+          loadingtrainings: false,
+        })
       );
   }
   onDeleteClick(id) {
@@ -56,6 +73,8 @@ class Learner extends Component {
                   <th>Email</th>
                   <th>Nom</th>
                   <th>Prenom</th>
+                  <th>training</th>
+                  <th></th>
                 </tr>
               </thead>
               <tbody>
@@ -65,11 +84,34 @@ class Learner extends Component {
                     <td>{learner.lastName}</td>
                     <td>{learner.firstName}</td>
                     <td>
+                      {/* <button
+                        onClick={this.gettrainingbyid.bind(
+                          this,
+                          learner.training
+                        )}
+                      >
+                        détails
+                      </button>
+ */}
+                      {learner.training.map((tr) => (
+                        <>
+                          {tr.title}
+                          <br />
+                          {tr.speciality}
+                          <br />
+                          <Moment format="YYYY/MM/DD">
+                            {tr.startDate}
+                          </Moment>-{" "}
+                          <Moment format="YYYY/MM/DD">{tr.endDate}</Moment>
+                        </>
+                      ))}
+                    </td>
+                    <td>
                       <button
                         onClick={this.onDeleteClick.bind(this, learner._id)}
                         className="btn btn-danger btn-circle"
                       >
-                        <i class="fas fa-trash"></i>
+                        <i className="fas fa-trash"></i>
                       </button>
                     </td>
                   </tr>

@@ -6,11 +6,15 @@ const { User, validateUser } = require("../../Models/User");
 
 exports.signUp = async function (req, res, next) {
   const { error } = validateUser(req.body);
-  if (error) return res.status(400).send(error.details[0].message);
-  // if (error) return res.status(400).send("Passwor must contain at least Min 8 Character, Uppercase,LowerCase,Number");
-
+  //if (error) return res.status(400).send(error.details[0].message);
   let user = await User.findOne({ email: req.body.email });
   if (user) return res.status(400).send("User already registered");
+  if (error)
+    return res
+      .status(400)
+      .send(
+        "Passwor must contain at least Min 8 Character, Uppercase,LowerCase,Number"
+      );
 
   user = new User(
     _.pick(req.body, ["email", "firstName", "lastName", "password", "role"])

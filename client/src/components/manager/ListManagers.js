@@ -8,10 +8,11 @@ class Manager extends Component {
       managers: [],
     };
   }
-  s;
+
   componentDidMount() {
     var myHeaders = new Headers();
     myHeaders.append("x-auth-token", localStorage.jwtToken);
+    console.log(localStorage);
     myHeaders.append("Content-Type", "application/json");
     fetch("/api/user/allManagers", {
       method: "GET",
@@ -56,7 +57,6 @@ class Manager extends Component {
                   <th>Nom</th>
                   <th>Prenom</th>
                   <th>company</th>
-                  <th></th>
                 </tr>
               </thead>
               <tbody>
@@ -71,7 +71,7 @@ class Manager extends Component {
                         onClick={this.onDeleteClick.bind(this, manager._id)}
                         className="btn btn-danger btn-circle"
                       >
-                        <i class="fas fa-trash"></i>
+                        <i className="fas fa-trash"></i>
                       </button>
                     </td>
                   </tr>
