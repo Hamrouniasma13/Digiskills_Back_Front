@@ -50,7 +50,7 @@ export const setCourseLoading = () => {
 // Delete Course
 export const deleteCourse = (id) => (dispatch) => {
   axios
-    .delete(`/api/courses/${id}`)
+    .delete(`/api/course/removeCourse/${id}`)
     .then((res) =>
       dispatch({
         type: DELETE_COURSE,

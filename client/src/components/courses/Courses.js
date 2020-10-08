@@ -1,33 +1,48 @@
 import React, { Component } from 'react'
-import { connect } from 'react-redux'
-import Spinner from '../common/Spinner'
-import { getCourses } from '../../actions/courseActions'
-import PropTypes from 'prop-types';
+
 import { Link } from "react-router-dom";
 import CourseItemss from "./CourseItemss"
 class Courses extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+          loadingCourses: true,
+          courses: [],
+        };
+      }
 
     componentDidMount() {
-        this.props.getCourses();
+      var myHeaders = new Headers();
+                      myHeaders.append("x-auth-token", localStorage.jwtToken);
+                      myHeaders.append("Content-Type", "application/json");
+                      fetch(
+                        "/api/course/allCourses",
+                        {
+                          method: "GET",
+                          headers: myHeaders,
+                        }
+                      )
+                        .then((res) => res.json())
+                        .then((res) =>
+                          this.setState({
+                            courses: res,
+                            loadingCourses: false,
+                          })
+                        );
+                    }
 
-    }
+    
 
     render() {
-        const { courses, loading } = this.props.course
-        let coursesItems;
+      
 
-        if (courses === null || loading) {
-            coursesItems = <Spinner />
-        } else {
-            if (courses.length > 0) {
-                coursesItems = courses.map(course =>
+       
+                let coursesItems = this.state.courses.map(course =>
                     (
                         <CourseItemss key={course._id} course={course} />
                     ))
-            } else {
-                coursesItems = <h4>No courses Found ... </h4>
-            }
-        }
+           
+        
         return (
             <div className="courses">
                 <div className="container">
@@ -36,13 +51,14 @@ class Courses extends Component {
                             <div>
                                 <Link to="/addcourses" className="btn btn-lg btn-info">
                                     Ajouter des cours
- </Link>
+                                </Link>
                             </div>
-                            <h1 className="display-4 text-center">Cours
-                            
+                            <h1 className="display-4 text-center">
+                            Cours
                             </h1>
                             <p className="lead text-center">
-Choisir votre cours                                 </p>
+                                Choisir votre cours                                 
+                            </p>
                             {coursesItems}
                         </div>
                     </div>
@@ -53,11 +69,4 @@ Choisir votre cours                                 </p>
     }
 }
 
-Courses.propTypes = {
-    getCourses: PropTypes.func.isRequired,
-    course: PropTypes.object.isRequired,
-}
-const mapStateToProps = state => ({
-    course: state.course
-})
-export default connect(mapStateToProps, { getCourses })(Courses);
+export default Courses
