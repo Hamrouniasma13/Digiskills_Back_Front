@@ -21,7 +21,11 @@ import NewTraining from "../trainings/newTraining";
 import Courses from "../courses/Courses";
 import AddModule from "../modules/AddModule";
 import Register from "../auth/Register";
+<<<<<<< HEAD
 import newCourse from "../courses/newCourse"
+=======
+import Profile from "../profile/Profile";
+>>>>>>> 3a6de712e91f533df7fdb80ac2188b3bce666a4a
 
 class Dashboard extends Component {
   // componentDidMount() {
@@ -32,46 +36,11 @@ class Dashboard extends Component {
     this.props.deleteAccount();
   }
 
-  gettrainingbyid(id) {
-    var myHeaders = new Headers();
-    myHeaders.append("x-auth-token", localStorage.jwtToken);
-    myHeaders.append("Content-Type", "application/json");
-    fetch(`/api/training//displayTraining/${id}`, {
-      method: "GET",
-      headers: myHeaders,
-    })
-      .then((res) => res.json())
-      .then((res) =>
-        this.setState({
-          trainings: res,
-          loadingtrainings: false,
-        })
-      );
-  }
   render() {
     const { user } = this.props.auth;
     // const { profile, loading } = this.props.profile;
 
     let dashboardContent;
-    const TrainingList = (id) => {
-      var myHeaders = new Headers();
-      myHeaders.append("x-auth-token", localStorage.jwtToken);
-      myHeaders.append("Content-Type", "application/json");
-      fetch(`/api/training/displayTraining/${id}`, {
-        method: "GET",
-        headers: myHeaders,
-      })
-        .then((res) => res.json())
-        .then(
-          (res) =>
-            this.setState({
-              trainings: res,
-              loadingtrainings: false,
-            }),
-          console.log("ok" + user._id)
-        );
-      return <div>{user.training}</div>;
-    };
 
     // if (profile === null || loading) {
     //   dashboardContent = <Spinner />;
@@ -110,7 +79,7 @@ class Dashboard extends Component {
 
     const AdminRoutes = () => {
       const { path } = useRouteMatch();
-      console.log("path    " + path);
+      // console.log("path    " + path);
       return (
         <Switch>
           <PrivateRoute exact path={`${path}`}>
@@ -125,27 +94,29 @@ class Dashboard extends Component {
           <Route path={`${path}/addcourses`} component={Addcourses} />
           <Route path={`${path}/newCourse`} component={newCourse} />
           <Route path={`${path}/add-training`} component={AddTraining} />
+          <Route path={`${path}/me`} component={Profile} />
         </Switch>
       );
     };
 
     const LearnerRoutes = () => {
       const { path } = useRouteMatch();
-      console.log("path    " + path);
+      // console.log("path    " + path);
+
       return (
         <Switch>
           <PrivateRoute exact path={`${path}`}>
             <p>Learner</p>
-            <TrainingList handler={user.training}></TrainingList>
           </PrivateRoute>
           <Route path={`${path}/trainings`} component={Trainings} />
+          <Route path={`${path}/me`} component={Profile} />
         </Switch>
       );
     };
 
     const ManagerRoutes = () => {
       const { path } = useRouteMatch();
-      console.log("path    " + path);
+      // console.log("path    " + path);
       return (
         <Switch>
           <PrivateRoute exact path={`${path}`}>
@@ -154,7 +125,7 @@ class Dashboard extends Component {
           <Route path={`${path}/trainings`} component={Trainings} />
           <Route path={`${path}/add-training`} component={AddTraining} />
           <Route path={`${path}/new-training`} component={NewTraining} />
-
+          <Route path={`${path}/me`} component={Profile} />
           <Route path={`${path}/register`} component={Register} />
           <Route path={`${path}/courses`} component={Courses} />
         </Switch>

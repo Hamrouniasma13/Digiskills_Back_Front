@@ -28,22 +28,7 @@ class Learner extends Component {
         })
       );
   }
-  gettrainingbyid(id) {
-    var myHeaders = new Headers();
-    myHeaders.append("x-auth-token", localStorage.jwtToken);
-    myHeaders.append("Content-Type", "application/json");
-    fetch(`/api/training/displayTraining/${id}`, {
-      method: "GET",
-      headers: myHeaders,
-    })
-      .then((res) => res.json())
-      .then((res) =>
-        this.setState({
-          trainings: res,
-          loadingtrainings: false,
-        })
-      );
-  }
+
   onDeleteClick(id) {
     var myHeaders = new Headers();
     myHeaders.append("x-auth-token", localStorage.jwtToken);
