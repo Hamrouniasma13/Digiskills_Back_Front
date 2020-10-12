@@ -21,15 +21,13 @@ import NewTraining from "../trainings/newTraining";
 import Courses from "../courses/Courses";
 import AddModule from "../modules/AddModule";
 import Register from "../auth/Register";
-<<<<<<< HEAD
-import newCourse from "../courses/newCourse"
-=======
+import PWD from "../auth/EditPassword";
+import newCourse from "../courses/newCourse";
 import Profile from "../profile/Profile";
->>>>>>> 3a6de712e91f533df7fdb80ac2188b3bce666a4a
+import { CropLandscapeOutlined } from "@material-ui/icons";
 
 class Dashboard extends Component {
   // componentDidMount() {
-  //   this.props.getCurrentProfile();
   // }
 
   onDeleteClick(e) {
@@ -38,54 +36,23 @@ class Dashboard extends Component {
 
   render() {
     const { user } = this.props.auth;
-    // const { profile, loading } = this.props.profile;
-
+    console.log(user._id);
     let dashboardContent;
 
-    // if (profile === null || loading) {
-    //   dashboardContent = <Spinner />;
-    // } else {
-    //   //Check if logged in user has profile data
-    //   if (Object.keys(profile).length > 0) {
-    //     dashboardContent = (
-    //       <div>
-    //         <p className="lead text-muted">
-    //           Welcome{" "}
-    //           <Link to={`/profile/${profile.handle}`}>{user.firstName}</Link>
-    //         </p>
-    //         <ProfileActions />
-    //         <div style={{ marginBottom: "60px" }} />
-    //         {/* <button
-    //           onClick={this.onDeleteClick.bind(this)}
-    //           className="btn btn-danger"
-    //         >
-    //           Delete My Account
-    //         </button> */}
-    //       </div>
-    //     );
-    //   } else {
-    //     //User is logged in but no profile
-    //     dashboardContent = (
-    //       <div>
-    //         <p className="lead text-muted">Welcome {user.firstName}</p>
-    //         <p>You have not yet setup a profile, please add some info</p>
-    //         <Link to="/create-profile" className="btn btn-lg btn-info">
-    //           Create Profile
-    //         </Link>
-    //       </div>
-    //     );
-    //   }
-    // }
 
     const AdminRoutes = () => {
       const { path } = useRouteMatch();
-      // console.log("path    " + path);
       return (
         <Switch>
           <PrivateRoute exact path={`${path}`}>
-            <p>admin</p>
+            <div class="d-sm-flex align-items-center justify-content-between mb-4">
+            <h1 class="h3 mb-0 text-gray-800">admin</h1>
+          
+            <a href="/dashboard/EditP" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-edit text-white-50"></i> Changer MDP</a>
+            </div>
           </PrivateRoute>
           <Route path={`${path}/trainings`} component={Trainings} />
+          <Route path={`${path}/new-training`} component={NewTraining} />
           <Route path={`${path}/learners`} component={Learners} />
           <Route path={`${path}/managers`} component={Managers} />
           <Route path={`${path}/courses`} component={Courses} />
@@ -95,32 +62,41 @@ class Dashboard extends Component {
           <Route path={`${path}/newCourse`} component={newCourse} />
           <Route path={`${path}/add-training`} component={AddTraining} />
           <Route path={`${path}/me`} component={Profile} />
+          <Route path={`${path}/EditP`} component={PWD} />
         </Switch>
       );
     };
 
     const LearnerRoutes = () => {
       const { path } = useRouteMatch();
-      // console.log("path    " + path);
 
       return (
         <Switch>
           <PrivateRoute exact path={`${path}`}>
-            <p>Learner</p>
+          <div class="d-sm-flex align-items-center justify-content-between mb-4">
+            <h1 class="h3 mb-0 text-gray-800">Learner</h1>
+          
+            <a href="/dashboard/EditP" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-edit text-white-50"></i> Changer MDP</a>
+            </div>
+            <a href="/dashboard/EditP" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-edit text-white-50"></i> Changer MDP</a>
           </PrivateRoute>
           <Route path={`${path}/trainings`} component={Trainings} />
           <Route path={`${path}/me`} component={Profile} />
+          <Route path={`${path}/EditP`} component={PWD} />
         </Switch>
       );
     };
 
     const ManagerRoutes = () => {
       const { path } = useRouteMatch();
-      // console.log("path    " + path);
       return (
         <Switch>
           <PrivateRoute exact path={`${path}`}>
-            <p>Manager</p>
+          <div class="d-sm-flex align-items-center justify-content-between mb-4">
+            <h1 class="h3 mb-0 text-gray-800">Manager</h1>
+          
+            <a href="/dashboard/EditP" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-edit text-white-50"></i> Changer MDP</a>
+            </div>
           </PrivateRoute>
           <Route path={`${path}/trainings`} component={Trainings} />
           <Route path={`${path}/add-training`} component={AddTraining} />
@@ -128,6 +104,7 @@ class Dashboard extends Component {
           <Route path={`${path}/me`} component={Profile} />
           <Route path={`${path}/register`} component={Register} />
           <Route path={`${path}/courses`} component={Courses} />
+          <Route path={`${path}/EditP`} component={PWD} />
         </Switch>
       );
     };
@@ -164,7 +141,9 @@ class Dashboard extends Component {
               <Header />
               {/* <Dashboard /> */}
               <div className="container">
-                <RoleRoutes />
+
+              <RoleRoutes />
+              
               </div>
               <Footer />
             </div>
@@ -176,14 +155,11 @@ class Dashboard extends Component {
 }
 
 Dashboard.propTypes = {
-  // getCurrentProfile: PropTypes.func.isRequired,
   deleteAccount: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,
-  // profile: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = (state) => ({
-  // profile: state.profile,
   auth: state.auth,
 });
 export default connect(mapStateToProps, {
