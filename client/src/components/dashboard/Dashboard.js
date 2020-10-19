@@ -27,8 +27,32 @@ import Profile from "../profile/Profile";
 import { CropLandscapeOutlined } from "@material-ui/icons";
 
 class Dashboard extends Component {
-  // componentDidMount() {
-  // }
+  constructor(props) {
+    super(props);
+    this.state = {
+      profile: [],
+      loadingprofile: true,
+    };
+  }
+   componentDidMount() {
+    var myHeaders = new Headers();
+    myHeaders.append("x-auth-token", localStorage.jwtToken);
+    myHeaders.append("Content-Type", "application/json");
+    fetch("/api/user/me", {
+      method: "GET",
+      headers: myHeaders,
+    })
+      .then((res) => res.json())
+      .then((result) =>
+        this.setState({
+          loadingprofile: false,
+          profile: result,
+        }),
+       
+      );
+      console.log("ok")
+      console.log(this.state.profile.training)
+   }
 
   onDeleteClick(e) {
     this.props.deleteAccount();
@@ -36,9 +60,10 @@ class Dashboard extends Component {
 
   render() {
     const { user } = this.props.auth;
-    console.log(user._id);
+    console.log(this.state.profile)
+    console.log(this.state.profile.training)
     let dashboardContent;
-
+    
 
     const AdminRoutes = () => {
       const { path } = useRouteMatch();
@@ -78,7 +103,6 @@ class Dashboard extends Component {
           
             <a href="/dashboard/EditP" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-edit text-white-50"></i> Changer MDP</a>
             </div>
-            <a href="/dashboard/EditP" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-edit text-white-50"></i> Changer MDP</a>
           </PrivateRoute>
           <Route path={`${path}/trainings`} component={Trainings} />
           <Route path={`${path}/me`} component={Profile} />
@@ -143,7 +167,31 @@ class Dashboard extends Component {
               <div className="container">
 
               <RoleRoutes />
+
+              {/* {
+              this.state.profile.training != null ? (
               
+                
+                <div>
+              {this.state.profile.training.map((tr) => (
+              
+                        <>
+                          {tr._id}
+                          <br /> */}
+                          {/* {tr.speciality}
+                          <br />
+                          {/* <Moment format="YYYY/MM/DD">
+                            {tr.startDate}
+                          </Moment>-{" "}
+                          <Moment format="YYYY/MM/DD">{tr.endDate}</Moment> */}
+                         {/* </>
+                      ))
+                      }
+                      </div>
+                  ): (
+                      ""
+                    )
+                    }  */}
               </div>
               <Footer />
             </div>

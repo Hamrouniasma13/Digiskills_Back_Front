@@ -26,7 +26,8 @@ export const loginUser = (userData, history) => async (dispatch) => {
       type: SET_CURRENT_USER,
       payload: jwt_decode(localStorage.jwtToken),
     });
-
+    console.log(data);
+    
     history.push("/dashboard");
   } catch (err) {
     if (err.response) {

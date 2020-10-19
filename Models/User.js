@@ -84,7 +84,7 @@ function updateUserName(user) {
 function updateUserPassword(user) {
   const schema = {
     oldPW: joi.string().required(),
-    newPW: joi.string().required(),
+    newPW: joi.string().regex(RegExp(pattern)).required(),
   };
   return joi.validate(user, schema);
 }
