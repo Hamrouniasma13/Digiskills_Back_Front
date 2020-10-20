@@ -75,17 +75,17 @@ class ProfileHeader extends Component {
             </div> */}
             <div className="text-center">
               <h1 className="displa-4 text-center">
-                {profile.firstName} &nbsp;&nbsp;
-                {/* <CreateOutlinedIcon
+                {profile.firstName} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <CreateOutlinedIcon
                   onClick={() => this.onup.bind(this, profile.firstName)}
-                ></CreateOutlinedIcon> */}
-                <button
+                ></CreateOutlinedIcon>
+                {/* <button
                         onClick={this.onup.bind(this, profile.firstName)}
                         className="btn btn-danger btn-circle"
                       >
                         <i class="fas fa-edit text-white-50"></i> 
                        
-                      </button>
+                      </button> */}
                       
               </h1>
 
