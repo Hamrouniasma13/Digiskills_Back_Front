@@ -1,5 +1,8 @@
 import React from "react";
 import Grid from "@material-ui/core/Grid";
+import SelectListGroup from "../common/SelectListGroup";
+import Chip from "../common/Chip";
+
 import {
   Typography,
   TextField,
@@ -21,10 +24,16 @@ class NewTraining extends React.Component {
     super(props);
     this.state = {
       loadingCourses: true,
+      loadingTraining: true,
       courses: [],
+      optCourses: [],
       selectedCourses: [],
+      errors: {},
+
     };
     this.DeleteCourse = this.DeleteCourse.bind(this);
+    this.onChangeCourse = this.onChangeCourse.bind(this);
+    this.onChangeCourseOpt = this.onChangeCourseOpt.bind(this);
   }
 
   DeleteCourse(index, setFieldValue) {
@@ -36,6 +45,31 @@ class NewTraining extends React.Component {
     }));
     setFieldValue("courses", newSelectedCourses);
   }
+  onChangeCourse = async (courseTitle, setFieldValue) => {
+    console.info(courseTitle);
+    await this.setState((prevState) => ({
+      selectedCourses: prevState.selectedCourses.concat(
+        courseTitle
+      ),
+    }));
+
+    setFieldValue("courses", this.state.selectedCourses);
+  }
+
+
+  onChangeCourseOpt = async (courseTitle, setFieldValue) => {
+    console.info(courseTitle);
+    await this.setState((prevState) => ({
+      selectedCourses: prevState.selectedCourses.concat(
+        courseTitle
+      ),
+    }));
+
+    setFieldValue("optCourses", this.state.selectedCourses);
+  }
+  // inputProps={{
+  //   name: "courses",
+  // }}
 
   // componentDidMount() {
   //   var myHeaders = new Headers();
@@ -78,10 +112,38 @@ class NewTraining extends React.Component {
               startDate: "",
               endDate: "",
               courses: this.state.selectedCourses,
+              optCourses: this.state.selectedCourses
+
             }}
-            onSubmit={(values, { setFieldValue }) => {
-              console.log(values);
+            onSubmit={(values) => {
+              console.log(values)
+              this.setState({ loadingTraining: true });
+
+              var myHeaders = new Headers();
+              myHeaders.append("x-auth-token", localStorage.jwtToken);
+              myHeaders.append("Content-Type", "application/json");
+              fetch(
+                "/api/training/addTraining",
+                {
+                  method: "POST",
+                  headers: myHeaders,
+                  body: JSON.stringify({
+                    title: values.title,
+                    courses: values.selectedCourses,
+                    optCourses: values.selectedCourses,
+                    speciality: values.speciality,
+                    startDate: values.startDate,
+                    endDate: values.endDate,
+
+                  })
+                }
+              )
+
+                .then((res) => res.json())
+                .catch(error => console.error(`Error:`, error))
+                .then(response => console.log(`Success:`, response));
             }}
+
           >
             {({
               values,
@@ -89,25 +151,15 @@ class NewTraining extends React.Component {
               handleBlur,
               submitForm,
               setFieldValue,
+              onChangeCourse
             }) => (
-              <>
-                <TextField
-                  fullWidth
-                  name="title"
-                  label="Titre"
-                  value={values.title}
-                  variant="outlined"
-                  margin="normal"
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                />
-
-                <FormControl style={{ width: "100%" }}>
-                  <InputLabel htmlFor="age-native-simple">
-                    Spécialité
-                  </InputLabel>
-                  <Select
+                <>
+                  <TextField
                     fullWidth
+                    name="title"
+                    label="Titre"
+                    value={values.title}
+                    variant="outlined"
                     margin="normal"
                     name="speciality"
                     value={values.speciality}
@@ -116,6 +168,7 @@ class NewTraining extends React.Component {
                       const selectedSpec = e.target.value;
                       setFieldValue("speciality", selectedSpec);
                       var myHeaders = new Headers();
+                      console.log(localStorage);
                       myHeaders.append("x-auth-token", localStorage.jwtToken);
                       myHeaders.append("Content-Type", "application/json");
                       fetch(
@@ -142,95 +195,160 @@ class NewTraining extends React.Component {
                     <option value="Social media">Social media</option>
                     <option value="Marketing">Marketing</option>
                     <option value="Other">Other</option>
-                  </Select>
-                </FormControl>
+               
 
                 {!this.state.loadingCourses && (
                   <FormControl style={{ width: "100%" }}>
-                    <InputLabel htmlFor="age-native-simple">Cours</InputLabel>
+                    <InputLabel htmlFor="age-native-simple">
+                      Spécialité
+                  </InputLabel>
+
+
+
                     <Select
                       fullWidth
                       margin="normal"
-                      name="courses"
-                      defaultValue="1"
+                      name="speciality"
                       value={values.speciality}
-                      onChange={async (e) => {
-                        await this.setState((prevState) => ({
-                          selectedCourses: prevState.selectedCourses.concat(
-                            e.target.value
-                          ),
-                        }));
-
-                        setFieldValue("courses", this.state.selectedCourses);
+                      onChange={(e) => {
+                        this.setState({ loadingCourses: true });
+                        const selectedSpec = e.target.value;
+                        setFieldValue("speciality", selectedSpec);
+                        var myHeaders = new Headers();
+                        myHeaders.append("x-auth-token", localStorage.jwtToken);
+                        myHeaders.append("Content-Type", "application/json");
+                        fetch(
+                          `/api/course/displayCourseByBackground/${selectedSpec}`,
+                          {
+                            method: "GET",
+                            headers: myHeaders,
+                          }
+                        )
+                          .then((res) => res.json())
+                          .then((res) =>
+                            this.setState({
+                              courses: res,
+                              loadingCourses: false,
+                            })
+                          );
                       }}
                       inputProps={{
-                        name: "courses",
+                        name: "speciality",
                       }}
                     >
-                      <option value="1">choose Course...</option>
-                      {this.state.courses.map(
-                        (course) =>
-                          !(
-                            this.state.selectedCourses.indexOf(course.title) >=
-                            0
-                          ) && (
-                            <option
-                              key={Math.random().toString(36).substring(7)}
-                              value={course.title}
-                            >
-                              {course.title}
-                            </option>
-                          )
-                      )}
+                      <option aria-label="None" value="" />
+                      <option value="IT">IT</option>
+                      <option value="Social media">Social media</option>
+                      <option value="Marketing">Marketing</option>
+                      <option value="Other">Other</option>
                     </Select>
                   </FormControl>
-                )}
-                {this.state.selectedCourses.length > 0 && (
-                  <Grid container item xs={12}>
-                    {this.state.selectedCourses.map((course, index) => (
-                      <CoursesTags
-                        key={Math.random().toString(36).substring(7)}
-                        index={index}
-                        course={course}
-                        setFieldValue={setFieldValue}
-                        DeleteCourse={this.DeleteCourse}
-                      />
-                    ))}
-                  </Grid>
-                )}
 
-                <TextField
-                  fullWidth
-                  name="startDate"
-                  label="Date Debut"
-                  type="date"
-                  value={values.startDate}
-                  variant="outlined"
-                  margin="normal"
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  InputLabelProps={{
-                    shrink: true,
-                  }}
-                />
-                <TextField
-                  fullWidth
-                  name="endDate"
-                  label="Date Fin"
-                  type="date"
-                  value={values.endDate}
-                  variant="outlined"
-                  margin="normal"
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  InputLabelProps={{
-                    shrink: true,
-                  }}
-                />
+                  {!this.state.loadingCourses && (
+                    <div style={{ width: "100%" }}>
 
-                <Button onClick={submitForm}>Submit</Button>
-              </>
-            )}
+                      <div
+                        fullWidth
+                        margin="normal"
+                        name="courses"
+                        defaultValue="1"
+                        value={values.speciality}
+                        onChange={async (e) => {
+                          await this.setState((prevState) => ({
+                            selectedCourses: prevState.selectedCourses.concat(
+                              e.target.value
+                            ),
+                          }));
+
+                          setFieldValue("courses", this.state.selectedCourses);
+                        }}
+                        inputProps={{
+                          name: "courses",
+                        }}
+                      >
+
+
+                        {this.state.courses.map(
+                          (course) =>
+                            !(
+                              this.state.selectedCourses.indexOf(course.title) >=
+                              0
+                            ) && (
+
+
+
+                              <div key={Math.random().toString(36).substring(7)}
+                                value={course.title} className="card" style={{ width: "18rem;" }}>
+                                <div className="card-body" >
+                                  <h5 className="card-title" >{course.title}</h5>
+                                  <h6 className="card-subtitle mb-2 text-muted">{course.background}</h6>
+                                  <Button variant="outlined" color="primary">
+                                    Plan
+                                  </Button>
+                                  <Button variant="contained" color="primary" onClick={() => this.onChangeCourse(course.title, setFieldValue)}
+                                  >
+                                    obligatoire
+                                  </Button>
+                                  <Button variant="contained" color="primary" onClick={() => this.onChangeCourseOpt(course.title, setFieldValue)}
+                                  >
+                                    optionel
+                                  </Button>
+
+
+                                </div>
+
+                              </div>
+                            )
+                        )}
+                      </div>
+                    </div>
+                  )}
+                  {this.state.selectedCourses.length > 0 && (
+                    <Grid container item xs={12}>
+                      {this.state.selectedCourses.map((course, index) => (
+                        <CoursesTags
+                          key={Math.random().toString(36).substring(7)}
+                          index={index}
+                          course={course}
+                          setFieldValue={setFieldValue}
+                          DeleteCourse={this.DeleteCourse}
+                        />
+                      ))}
+                    </Grid>
+                  )}
+
+                  <TextField
+                    fullWidth
+                    name="startDate"
+                    label="Date Debut"
+                    type="date"
+                    value={values.startDate}
+                    variant="outlined"
+                    margin="normal"
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    InputLabelProps={{
+                      shrink: true,
+                    }}
+                  />
+                  <TextField
+                    fullWidth
+                    name="endDate"
+                    label="Date Fin"
+                    type="date"
+                    value={values.endDate}
+                    variant="outlined"
+                    margin="normal"
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    InputLabelProps={{
+                      shrink: true,
+                    }}
+                  />
+
+                  <Button onClick={submitForm}>Submit</Button>
+                </>
+              )}
           </Formik>
         </Grid>
       </Grid>

@@ -3,13 +3,11 @@ import { Link, useHistory, useRouteMatch } from "react-router-dom";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { getCurrentProfile, deleteAccount } from "../../actions/profileActions";
-import Spinner from "../common/Spinner";
 import Header from "../layout/Header";
 import Footer from "../layout/Footer";
 import { Switch, Route } from "react-router-dom";
 import Trainings from "../trainings/Trainings";
 
-import ProfileActions from "./ProfileActions";
 import SideBar from "../layout/roleSideBar";
 import PrivateRoute from "../common/PrivateRoute";
 import NotFound from "../not-found/NotFound";
@@ -28,9 +26,32 @@ import Profile from "../profile/Profile";
 
 
 class Dashboard extends Component {
-  // componentDidMount() {
-  //   this.props.getCurrentProfile();
-  // }
+  constructor(props) {
+    super(props);
+    this.state = {
+      profile: [],
+      loadingprofile: true,
+    };
+  }
+   componentDidMount() {
+    var myHeaders = new Headers();
+    myHeaders.append("x-auth-token", localStorage.jwtToken);
+    myHeaders.append("Content-Type", "application/json");
+    fetch("/api/user/me", {
+      method: "GET",
+      headers: myHeaders,
+    })
+      .then((res) => res.json())
+      .then((result) =>
+        this.setState({
+          loadingprofile: false,
+          profile: result,
+        }),
+       
+      );
+      console.log("ok")
+      console.log(this.state.profile.training)
+   }
 
   onDeleteClick(e) {
     this.props.deleteAccount();
@@ -38,54 +59,24 @@ class Dashboard extends Component {
 
   render() {
     const { user } = this.props.auth;
-    // const { profile, loading } = this.props.profile;
-
+    console.log(this.state.profile)
+    console.log(this.state.profile.training)
     let dashboardContent;
-
-    // if (profile === null || loading) {
-    //   dashboardContent = <Spinner />;
-    // } else {
-    //   //Check if logged in user has profile data
-    //   if (Object.keys(profile).length > 0) {
-    //     dashboardContent = (
-    //       <div>
-    //         <p className="lead text-muted">
-    //           Welcome{" "}
-    //           <Link to={`/profile/${profile.handle}`}>{user.firstName}</Link>
-    //         </p>
-    //         <ProfileActions />
-    //         <div style={{ marginBottom: "60px" }} />
-    //         {/* <button
-    //           onClick={this.onDeleteClick.bind(this)}
-    //           className="btn btn-danger"
-    //         >
-    //           Delete My Account
-    //         </button> */}
-    //       </div>
-    //     );
-    //   } else {
-    //     //User is logged in but no profile
-    //     dashboardContent = (
-    //       <div>
-    //         <p className="lead text-muted">Welcome {user.firstName}</p>
-    //         <p>You have not yet setup a profile, please add some info</p>
-    //         <Link to="/create-profile" className="btn btn-lg btn-info">
-    //           Create Profile
-    //         </Link>
-    //       </div>
-    //     );
-    //   }
-    // }
+    
 
     const AdminRoutes = () => {
       const { path } = useRouteMatch();
-      // console.log("path    " + path);
       return (
         <Switch>
           <PrivateRoute exact path={`${path}`}>
-            <p>admin</p>
+            <div class="d-sm-flex align-items-center justify-content-between mb-4">
+            <h1 class="h3 mb-0 text-gray-800">admin</h1>
+          
+            <a href="/dashboard/EditP" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-edit text-white-50"></i> Changer MDP</a>
+            </div>
           </PrivateRoute>
           <Route path={`${path}/trainings`} component={Trainings} />
+          <Route path={`${path}/new-training`} component={NewTraining} />
           <Route path={`${path}/learners`} component={Learners} />
           <Route path={`${path}/admins`} component={Admins} />
           <Route path={`${path}/managers`} component={Managers} />
@@ -97,32 +88,40 @@ class Dashboard extends Component {
           <Route path={`${path}/newModule`} component={newModule} /> 
           <Route path={`${path}/add-training`} component={AddTraining} />
           <Route path={`${path}/me`} component={Profile} />
+          <Route path={`${path}/EditP`} component={PWD} />
         </Switch>
       );
     };
 
     const LearnerRoutes = () => {
       const { path } = useRouteMatch();
-      // console.log("path    " + path);
 
       return (
         <Switch>
           <PrivateRoute exact path={`${path}`}>
-            <p>Learner</p>
+          <div class="d-sm-flex align-items-center justify-content-between mb-4">
+            <h1 class="h3 mb-0 text-gray-800">Learner</h1>
+          
+            <a href="/dashboard/EditP" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-edit text-white-50"></i> Changer MDP</a>
+            </div>
           </PrivateRoute>
           <Route path={`${path}/trainings`} component={Trainings} />
           <Route path={`${path}/me`} component={Profile} />
+          <Route path={`${path}/EditP`} component={PWD} />
         </Switch>
       );
     };
 
     const ManagerRoutes = () => {
       const { path } = useRouteMatch();
-      // console.log("path    " + path);
       return (
         <Switch>
           <PrivateRoute exact path={`${path}`}>
-            <p>Manager</p>
+          <div class="d-sm-flex align-items-center justify-content-between mb-4">
+            <h1 class="h3 mb-0 text-gray-800">Manager</h1>
+          
+            <a href="/dashboard/EditP" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-edit text-white-50"></i> Changer MDP</a>
+            </div>
           </PrivateRoute>
           <Route path={`${path}/trainings`} component={Trainings} />
           <Route path={`${path}/add-training`} component={AddTraining} />
@@ -130,6 +129,7 @@ class Dashboard extends Component {
           <Route path={`${path}/me`} component={Profile} />
           <Route path={`${path}/register`} component={Register} />
           <Route path={`${path}/courses`} component={Courses} />
+          <Route path={`${path}/EditP`} component={PWD} />
         </Switch>
       );
     };
@@ -166,7 +166,33 @@ class Dashboard extends Component {
               <Header />
               {/* <Dashboard /> */}
               <div className="container">
-                <RoleRoutes />
+
+              <RoleRoutes />
+
+              {/* {
+              this.state.profile.training != null ? (
+              
+                
+                <div>
+              {this.state.profile.training.map((tr) => (
+              
+                        <>
+                          {tr._id}
+                          <br /> */}
+                          {/* {tr.speciality}
+                          <br />
+                          {/* <Moment format="YYYY/MM/DD">
+                            {tr.startDate}
+                          </Moment>-{" "}
+                          <Moment format="YYYY/MM/DD">{tr.endDate}</Moment> */}
+                         {/* </>
+                      ))
+                      }
+                      </div>
+                  ): (
+                      ""
+                    )
+                    }  */}
               </div>
               <Footer />
             </div>
@@ -178,14 +204,11 @@ class Dashboard extends Component {
 }
 
 Dashboard.propTypes = {
-  // getCurrentProfile: PropTypes.func.isRequired,
   deleteAccount: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,
-  // profile: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = (state) => ({
-  // profile: state.profile,
   auth: state.auth,
 });
 export default connect(mapStateToProps, {

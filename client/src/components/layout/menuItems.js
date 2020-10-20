@@ -27,13 +27,13 @@ export const AdminMenuItems = [
       },
       {
         name: "Ajouter",
-        href: "/dashboard/addcourses",
+        href: "/dashboard/newCourse",
       },
     ],
   },
   {
     name: "Client",
-    icons: "fas fa-fw fa-menu",
+    icons: "fas fa-fw fa-user",
     class: "collapsePages",
     label: "headingPages",
     items: [
@@ -85,13 +85,13 @@ export const ManagerMenuItems = [
       },
       {
         name: "Ajouter",
-        href: "/dashboard/add-training",
+        href: "/dashboard/new-training",
       },
     ],
   },
   {
     name: "Utilisateurs",
-    icons: "fas fa-fw fa-menu",
+    icons: "fas fa-fw fa-folder",
     class: "collapseUtilities",
     label: "headingUtilities",
     items: [
@@ -125,7 +125,7 @@ export const TrainingManagerMenuItems = [
   },
   {
     name: "Second Menu",
-    icons: "fas fa-fw fa-menu",
+    icons: "fas fa-fw fa-folder",
     class: "collapseUtilities",
     label: "headingUtilities",
     items: [

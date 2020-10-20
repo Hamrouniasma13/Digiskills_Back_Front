@@ -40,6 +40,7 @@ class Learner extends Component {
   }
 
   render() {
+    console.log(this.state.learners)
     return (
       <div class="card shadow mb-4">
         <div class="card-header py-3">
@@ -69,15 +70,7 @@ class Learner extends Component {
                     <td>{learner.lastName}</td>
                     <td>{learner.firstName}</td>
                     <td>
-                      {/* <button
-                        onClick={this.gettrainingbyid.bind(
-                          this,
-                          learner.training
-                        )}
-                      >
-                        détails
-                      </button>
- */}
+                     
                       {learner.training.map((tr) => (
                         <>
                           {tr.title}
