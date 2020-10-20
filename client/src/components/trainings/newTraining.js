@@ -33,7 +33,7 @@ class NewTraining extends React.Component {
     };
     this.DeleteCourse = this.DeleteCourse.bind(this);
     this.onChangeCourse = this.onChangeCourse.bind(this);
-    this.onChangeCourseOpt = this.onChangeCourseOpt.bind(this);
+
   }
 
   DeleteCourse(index, setFieldValue) {
@@ -57,16 +57,9 @@ class NewTraining extends React.Component {
   }
 
 
-  onChangeCourseOpt = async (courseTitle, setFieldValue) => {
-    console.info(courseTitle);
-    await this.setState((prevState) => ({
-      selectedCourses: prevState.selectedCourses.concat(
-        courseTitle
-      ),
-    }));
 
-    setFieldValue("optCourses", this.state.selectedCourses);
-  }
+
+
   // inputProps={{
   //   name: "courses",
   // }}
@@ -112,7 +105,7 @@ class NewTraining extends React.Component {
               startDate: "",
               endDate: "",
               courses: this.state.selectedCourses,
-              optCourses: this.state.selectedCourses
+
 
             }}
             onSubmit={(values) => {
@@ -130,7 +123,7 @@ class NewTraining extends React.Component {
                   body: JSON.stringify({
                     title: values.title,
                     courses: values.selectedCourses,
-                    optCourses: values.selectedCourses,
+
                     speciality: values.speciality,
                     startDate: values.startDate,
                     endDate: values.endDate,
@@ -161,43 +154,10 @@ class NewTraining extends React.Component {
                     value={values.title}
                     variant="outlined"
                     margin="normal"
-                    name="speciality"
-                    value={values.speciality}
-                    onChange={(e) => {
-                      this.setState({ loadingCourses: true });
-                      const selectedSpec = e.target.value;
-                      setFieldValue("speciality", selectedSpec);
-                      var myHeaders = new Headers();
-                      console.log(localStorage);
-                      myHeaders.append("x-auth-token", localStorage.jwtToken);
-                      myHeaders.append("Content-Type", "application/json");
-                      fetch(
-                        `/api/course/displayCourseByBackground/${selectedSpec}`,
-                        {
-                          method: "GET",
-                          headers: myHeaders,
-                        }
-                      )
-                        .then((res) => res.json())
-                        .then((res) =>
-                          this.setState({
-                            courses: res,
-                            loadingCourses: false,
-                          })
-                        );
-                    }}
-                    inputProps={{
-                      name: "speciality",
-                    }}
-                  >
-                    <option aria-label="None" value="" />
-                    <option value="IT">IT</option>
-                    <option value="Social media">Social media</option>
-                    <option value="Marketing">Marketing</option>
-                    <option value="Other">Other</option>
-               
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                  />
 
-                {!this.state.loadingCourses && (
                   <FormControl style={{ width: "100%" }}>
                     <InputLabel htmlFor="age-native-simple">
                       Spécialité
@@ -287,12 +247,9 @@ class NewTraining extends React.Component {
                                   </Button>
                                   <Button variant="contained" color="primary" onClick={() => this.onChangeCourse(course.title, setFieldValue)}
                                   >
-                                    obligatoire
+                                    Ajouter
                                   </Button>
-                                  <Button variant="contained" color="primary" onClick={() => this.onChangeCourseOpt(course.title, setFieldValue)}
-                                  >
-                                    optionel
-                                  </Button>
+
 
 
                                 </div>

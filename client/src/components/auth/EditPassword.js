@@ -41,7 +41,7 @@ class EditPassword extends Component {
           <Typography variant="body2">Changer Mot De Passe</Typography>
         </Grid>
         <Grid container item xs={12}>
-          <Formik
+          <Formik 
             initialValues={{
                 oldPW: "",
                 newPW:""   
@@ -76,10 +76,15 @@ class EditPassword extends Component {
               submitForm,
               setFieldValue,
             }) => (
-              <>
-          <div className="text-center">
+              <Grid container
+          item
+          xs={12}
+          direction="column"
+          justify="center"
+          alignContent="center">
+            <div className="text-center">
                 <TextField
-                
+                  fullWidth
                   name="oldPW"
                   label="old Mot de passe"
                   value={values.oldPW}
@@ -90,22 +95,20 @@ class EditPassword extends Component {
                   onBlur={handleBlur}
                   
                 />    
-                <br></br>
                 <TextField
-                
-                name="newPW"
-                label="nv Mot de passe"
-                value={values.newPW}
-                variant="outlined"
-                margin="normal"
-                type="password"
-                onChange={handleChange}
-                onBlur={handleBlur}
-                
-              />                 
+                  fullWidth
+                  name="newPW"
+                  label="nv Mot de passe"
+                  value={values.newPW}
+                  variant="outlined"
+                  margin="normal"
+                  type="password"
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                />                 
                   </div>         
           <Button onClick={submitForm} className="btn btn-warning btn-user btn-block">Changer</Button>
-              </>
+              </Grid>
             )}
           </Formik>
         </Grid>

@@ -17,7 +17,6 @@ class Register extends Component {
       email: "",
       password: "",
       role: "",
-      company: "",
       errors: {},
     };
     this.onChange = this.onChange.bind(this);
@@ -135,22 +134,7 @@ class Register extends Component {
                       />
                     </div>
 
-                    {this.state.role === "Manager" ? (
-                      <div class="form-group">
-                        <div class="col-sm-6 mb-3 mb-sm-0">
-                          <TextFieldGroup
-                            placeholder="Société"
-                            name="company"
-                            type="company"
-                            value={this.state.company}
-                            onChange={this.onChange}
-                            error={errors.company}
-                          />
-                        </div>
-                      </div>
-                    ) : (
-                      ""
-                    )}
+
 
                     <input
                       type="submit"

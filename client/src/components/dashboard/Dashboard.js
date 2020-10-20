@@ -23,7 +23,7 @@ import Register from "../auth/Register";
 import newCourse from "../courses/newCourse"
 import newModule from "../modules/newModule"
 import Profile from "../profile/Profile";
-
+import PWD from "../auth/EditPassword"
 
 class Dashboard extends Component {
   constructor(props) {
@@ -33,7 +33,7 @@ class Dashboard extends Component {
       loadingprofile: true,
     };
   }
-   componentDidMount() {
+  componentDidMount() {
     var myHeaders = new Headers();
     myHeaders.append("x-auth-token", localStorage.jwtToken);
     myHeaders.append("Content-Type", "application/json");
@@ -47,11 +47,11 @@ class Dashboard extends Component {
           loadingprofile: false,
           profile: result,
         }),
-       
+
       );
-      console.log("ok")
-      console.log(this.state.profile.training)
-   }
+    console.log("ok")
+    console.log(this.state.profile.training)
+  }
 
   onDeleteClick(e) {
     this.props.deleteAccount();
@@ -62,7 +62,7 @@ class Dashboard extends Component {
     console.log(this.state.profile)
     console.log(this.state.profile.training)
     let dashboardContent;
-    
+
 
     const AdminRoutes = () => {
       const { path } = useRouteMatch();
@@ -70,9 +70,9 @@ class Dashboard extends Component {
         <Switch>
           <PrivateRoute exact path={`${path}`}>
             <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="h3 mb-0 text-gray-800">admin</h1>
-          
-            <a href="/dashboard/EditP" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-edit text-white-50"></i> Changer MDP</a>
+              <h1 class="h3 mb-0 text-gray-800">admin</h1>
+
+              <a href="/dashboard/EditP" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-edit text-white-50"></i> Changer MDP</a>
             </div>
           </PrivateRoute>
           <Route path={`${path}/trainings`} component={Trainings} />
@@ -99,10 +99,10 @@ class Dashboard extends Component {
       return (
         <Switch>
           <PrivateRoute exact path={`${path}`}>
-          <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="h3 mb-0 text-gray-800">Learner</h1>
-          
-            <a href="/dashboard/EditP" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-edit text-white-50"></i> Changer MDP</a>
+            <div class="d-sm-flex align-items-center justify-content-between mb-4">
+              <h1 class="h3 mb-0 text-gray-800">Learner</h1>
+
+              <a href="/dashboard/EditP" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-edit text-white-50"></i> Changer MDP</a>
             </div>
           </PrivateRoute>
           <Route path={`${path}/trainings`} component={Trainings} />
@@ -117,10 +117,10 @@ class Dashboard extends Component {
       return (
         <Switch>
           <PrivateRoute exact path={`${path}`}>
-          <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="h3 mb-0 text-gray-800">Manager</h1>
-          
-            <a href="/dashboard/EditP" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-edit text-white-50"></i> Changer MDP</a>
+            <div class="d-sm-flex align-items-center justify-content-between mb-4">
+              <h1 class="h3 mb-0 text-gray-800">Manager</h1>
+
+              <a href="/dashboard/EditP" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-edit text-white-50"></i> Changer MDP</a>
             </div>
           </PrivateRoute>
           <Route path={`${path}/trainings`} component={Trainings} />
@@ -167,9 +167,9 @@ class Dashboard extends Component {
               {/* <Dashboard /> */}
               <div className="container">
 
-              <RoleRoutes />
+                <RoleRoutes />
 
-              {/* {
+                {/* {
               this.state.profile.training != null ? (
               
                 
@@ -179,13 +179,13 @@ class Dashboard extends Component {
                         <>
                           {tr._id}
                           <br /> */}
-                          {/* {tr.speciality}
+                {/* {tr.speciality}
                           <br />
                           {/* <Moment format="YYYY/MM/DD">
                             {tr.startDate}
                           </Moment>-{" "}
                           <Moment format="YYYY/MM/DD">{tr.endDate}</Moment> */}
-                         {/* </>
+                {/* </>
                       ))
                       }
                       </div>
