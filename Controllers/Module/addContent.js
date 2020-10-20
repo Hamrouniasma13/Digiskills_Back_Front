@@ -144,8 +144,9 @@ router.post("/addText/:moduleId", auth, isAdmin, async (req, res) => {
     { $set: { textContent: req.body.textContent } },
     { new: true }
   );
-
   res.send(module);
 });
+
+
 
 module.exports = router;

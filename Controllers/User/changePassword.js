@@ -5,12 +5,19 @@ const { User, updateUserPassword } = require("../../Models/User");
 
 exports.changePassword = async function (req, res, next) {
   const { error } = updateUserPassword(req.body);
-  if (error) return res.status(400).send(error.details[0].message);
+  // if (error) return res.status(400).send(error.details[0].message);
 
   const user = await User.findOne({ _id: req.user._id });
 
   const oldPW = await bcrypt.compare(req.body.oldPW, user.password);
   if (!oldPW) return res.status(400).send("Invalid old password");
+  if (error)
+    return res
+      .status(400)
+      .send(
+        "new password must contain at least Min 8 Character, Uppercase,LowerCase,Number"
+      );
+
 
   const newUser = await User.findByIdAndUpdate(
     req.user._id,

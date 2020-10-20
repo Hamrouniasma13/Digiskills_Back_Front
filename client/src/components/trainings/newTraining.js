@@ -161,10 +161,44 @@ class NewTraining extends React.Component {
                     value={values.title}
                     variant="outlined"
                     margin="normal"
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                  />
+                    name="speciality"
+                    value={values.speciality}
+                    onChange={(e) => {
+                      this.setState({ loadingCourses: true });
+                      const selectedSpec = e.target.value;
+                      setFieldValue("speciality", selectedSpec);
+                      var myHeaders = new Headers();
+                      console.log(localStorage);
+                      myHeaders.append("x-auth-token", localStorage.jwtToken);
+                      myHeaders.append("Content-Type", "application/json");
+                      fetch(
+                        `/api/course/displayCourseByBackground/${selectedSpec}`,
+                        {
+                          method: "GET",
+                          headers: myHeaders,
+                        }
+                      )
+                        .then((res) => res.json())
+                        .then((res) =>
+                          this.setState({
+                            courses: res,
+                            loadingCourses: false,
+                          })
+                        );
+                    }}
+                    inputProps={{
+                      name: "speciality",
+                    }}
+                  >
+                    <option aria-label="None" value="" />
+                    <option value="IT">IT</option>
+                    <option value="Social media">Social media</option>
+                    <option value="Marketing">Marketing</option>
+                    <option value="Other">Other</option>
+                  </Select>
+                </FormControl>
 
+                {!this.state.loadingCourses && (
                   <FormControl style={{ width: "100%" }}>
                     <InputLabel htmlFor="age-native-simple">
                       Spécialité
