@@ -38,6 +38,10 @@ export const AdminMenuItems = [
     label: "headingPages",
     items: [
       {
+        name: "Liste Admins",
+        href: "/dashboard/admins",
+      },
+      {
         name: "Liste Managers",
         href: "/dashboard/managers",
       },

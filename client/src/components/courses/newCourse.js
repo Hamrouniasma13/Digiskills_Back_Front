@@ -8,6 +8,8 @@ import {
   Select,
   Button,
 } from "@material-ui/core";
+import { withRouter } from "react-router-dom";
+
 import { Formik, FieldArray } from "formik";
 import IconButton from "@material-ui/core/IconButton";
 import AddBoxIcon from "@material-ui/icons/AddBox";
@@ -52,8 +54,9 @@ class newCourse extends React.Component {
                 target: "",     
             }}
             onSubmit={(values) =>  {
+                const history = this.props.history
+                console.log(history);
                 this.setState({ loadingCourses: true });
-                      
                       var myHeaders = new Headers();
                       myHeaders.append("x-auth-token", localStorage.jwtToken);
                       myHeaders.append("Content-Type", "application/json");
@@ -73,8 +76,16 @@ class newCourse extends React.Component {
                         }
                       )
                         .then((res) => res.json())
+                        .then(response =>
+                            {
+                              history.push({
+                                    pathname : "newModule",
+                                    state : {courseId :response._id}
+                              })
+                        
+
+                        })
                         .catch(error => console.error(`Error:`, error))
-                        .then(response => console.log(`Success:`, response)); 
                     }}
             
           >
@@ -162,4 +173,4 @@ class newCourse extends React.Component {
   }
 }
 
-export default newCourse;
+export default (withRouter(newCourse));

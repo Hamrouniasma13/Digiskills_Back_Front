@@ -15,17 +15,17 @@ import PrivateRoute from "../common/PrivateRoute";
 import NotFound from "../not-found/NotFound";
 import Addcourses from "../courses/Addcourse";
 import Learners from "../learner/Learner";
+import Admins from "../admin/Admin";
 import Managers from "../manager/ListManagers";
 import AddTraining from "../trainings/AddTraining";
 import NewTraining from "../trainings/newTraining";
 import Courses from "../courses/Courses";
 import AddModule from "../modules/AddModule";
 import Register from "../auth/Register";
-<<<<<<< HEAD
 import newCourse from "../courses/newCourse"
-=======
+import newModule from "../modules/newModule"
 import Profile from "../profile/Profile";
->>>>>>> 3a6de712e91f533df7fdb80ac2188b3bce666a4a
+
 
 class Dashboard extends Component {
   // componentDidMount() {
@@ -87,12 +87,14 @@ class Dashboard extends Component {
           </PrivateRoute>
           <Route path={`${path}/trainings`} component={Trainings} />
           <Route path={`${path}/learners`} component={Learners} />
+          <Route path={`${path}/admins`} component={Admins} />
           <Route path={`${path}/managers`} component={Managers} />
           <Route path={`${path}/courses`} component={Courses} />
           <Route path={`${path}/addModule`} component={AddModule} />
           <Route path={`${path}/register`} component={Register} />
           <Route path={`${path}/addcourses`} component={Addcourses} />
           <Route path={`${path}/newCourse`} component={newCourse} />
+          <Route path={`${path}/newModule`} component={newModule} /> 
           <Route path={`${path}/add-training`} component={AddTraining} />
           <Route path={`${path}/me`} component={Profile} />
         </Switch>

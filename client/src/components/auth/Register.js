@@ -59,9 +59,10 @@ class Register extends Component {
     const { user } = this.props.auth;
     const options = [
       { label: "Choisir un Role", Value: 0 },
-      { label: "Apprenant", value: "Learner" },
+      { label: "Learner", value: "Learner" },
       { label: "Responsable formation", value: "TrainingManager" },
       { label: "Manager", value: "Manager" },
+      { label: "Admin", value: "Admin" },
     ];
     return (
       <div class="bg-gradient-warning">

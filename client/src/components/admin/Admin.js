@@ -1,11 +1,12 @@
 import React, { Component } from "react";
+import Moment from "react-moment";
 
-class Manager extends Component {
+class Admin extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      loadingManagers: true,
-      managers: [],
+      loadingAdmins: true,
+      admins: [],
     };
   }
 
@@ -13,16 +14,17 @@ class Manager extends Component {
     var myHeaders = new Headers();
     myHeaders.append("x-auth-token", localStorage.jwtToken);
     myHeaders.append("Content-Type", "application/json");
-    fetch("/api/user/allManagers", {
+    fetch("/api/user/allAdmins", {
       method: "GET",
       headers: myHeaders,
     })
       .then((res) => res.json())
       .then((result) =>
         this.setState({
-          loadingManagers: false,
-          managers: result,
-        })
+            loadingAdmins: false,
+            admins: result,
+        }),
+        
       );
   }
 
@@ -40,7 +42,7 @@ class Manager extends Component {
     return (
       <div class="card shadow mb-4">
         <div class="card-header py-3">
-          <h6 class="m-0 font-weight-bold text-warning">Managers</h6>
+          <h6 class="m-0 font-weight-bold text-warning">ADMINS</h6>
         </div>
         <div class="card-body">
           <div class="table-responsive">
@@ -55,19 +57,20 @@ class Manager extends Component {
                   <th>Email</th>
                   <th>Nom</th>
                   <th>Prenom</th>
-                  <th>company</th>
+                  
+                  <th></th>
                 </tr>
               </thead>
               <tbody>
-                {this.state.managers.map((manager) => (
+                {this.state.admins.map((admin) => (
                   <tr>
-                    <td>{manager.email}</td>
-                    <td>{manager.lastName}</td>
-                    <td>{manager.firstName}</td>
-                    <td>{manager.company}</td>
+                    <td>{admin.email}</td>
+                    <td>{admin.lastName}</td>
+                    <td>{admin.firstName}</td>
+                   
                     <td>
                       <button
-                        onClick={this.onDeleteClick.bind(this, manager._id)}
+                        onClick={this.onDeleteClick.bind(this, admin._id)}
                         className="btn btn-danger btn-circle"
                       >
                         <i className="fas fa-trash"></i>
@@ -84,4 +87,4 @@ class Manager extends Component {
   }
 }
 
-export default Manager;
+export default Admin;
