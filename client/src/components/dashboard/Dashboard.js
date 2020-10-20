@@ -3,13 +3,11 @@ import { Link, useHistory, useRouteMatch } from "react-router-dom";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { getCurrentProfile, deleteAccount } from "../../actions/profileActions";
-import Spinner from "../common/Spinner";
 import Header from "../layout/Header";
 import Footer from "../layout/Footer";
 import { Switch, Route } from "react-router-dom";
 import Trainings from "../trainings/Trainings";
 
-import ProfileActions from "./ProfileActions";
 import SideBar from "../layout/roleSideBar";
 import PrivateRoute from "../common/PrivateRoute";
 import NotFound from "../not-found/NotFound";
@@ -21,11 +19,8 @@ import NewTraining from "../trainings/newTraining";
 import Courses from "../courses/Courses";
 import AddModule from "../modules/AddModule";
 import Register from "../auth/Register";
-<<<<<<< HEAD
 import newCourse from "../courses/newCourse"
-=======
 import Profile from "../profile/Profile";
->>>>>>> 3a6de712e91f533df7fdb80ac2188b3bce666a4a
 
 class Dashboard extends Component {
   // componentDidMount() {

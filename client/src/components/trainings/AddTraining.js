@@ -19,6 +19,7 @@ class AddTraining extends Component {
       endDate: "",
       speciality: "",
       course: "",
+      
       coursesList: [],
       errors: {},
       addedCourses: [],

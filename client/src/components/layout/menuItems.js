@@ -81,7 +81,7 @@ export const ManagerMenuItems = [
       },
       {
         name: "Ajouter",
-        href: "/dashboard/add-training",
+        href: "/dashboard/new-training",
       },
     ],
   },
